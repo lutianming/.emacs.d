@@ -1,8 +1,8 @@
 ;;----------el-get----------------------------------
 ;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-;; (unless (require 'el-get nil t) 
-;;   (with-current-buffer 
-;;       (url-retrieve-synchronously 
+;; (unless (require 'el-get nil t)
+;;   (with-current-buffer
+;;       (url-retrieve-synchronously
 ;;        "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
 ;;     (end-of-buffer)
 ;;     (eval-print-last-sexp)))
@@ -13,7 +13,7 @@
 (defvar leo-packages '(starter-kit starter-kit-bindings starter-kit-eshell
                                    ac-slime auctex auto-complete dired+ flymake
                                    magit smex popup undo-tree yasnippet
-                                   yasnippet-bundle zenburn-theme color-theme-solarized))
+                                   zenburn-theme color-theme-solarized))
 (defun leo-packages-installed-p ()
   (loop for p in leo-packages
         when (not (package-installed-p p)) do (return nil)
@@ -33,26 +33,35 @@
 (require 'w3m-load)
 (require 'mime-w3m)
 
+;; (require 'skeleton)
+;; (setq skeleton-pair t)
+;; (global-set-key "\"" 'skeleton-pair-insert-maybe)
+;; (global-set-key "(" 'skeleton-pair-insert-maybe)
+;; (global-set-key "[" 'skeleton-pair-insert-maybe)
+;; (global-set-key "{" 'skeleton-pair-insert-maybe)
+;;--------------------helm--------------------
+(require 'helm-config)
 
-;;--------------------anything--------------------
-;; (require 'anything-ipython)
-;; (add-hook 'python-mode-hook #'(lambda ()
-;;                                 (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
-;; (add-hook 'ipython-shell-hook #'(lambda ()
-;;                                 (define-key py-mode-map (kbd "M-<tab>") 'anything-ipython-complete)))
 ;;--------------------autopair--------------------
 (require 'autopair)
 (autopair-global-mode)
 (add-hook 'lisp-mode-hook
           '(lambda () (setq autopair-dont-activate t)))
 ;;---------yasnippet----------------
-(require 'yasnippet);
-(setq yas/minor-mode t)
+(require 'yasnippet)
+(yas/initialize)
+(setq yas/root-directory "~/.emacs.d/mysnippets")
+(yas/load-directory yas/root-directory)
+(setq-default yas/trigger-key "M-TAB")
+
 
 ;;----------auto-complete-----------------------------------
 (require 'auto-complete-config)
 (ac-config-default)
 (setq ac-quick-help-delay 1)
+(define-key ac-complete-mode-map "\r" nil)
+(define-key ac-complete-mode-map [return] nil)
+
 ;;--------------------workgroup--------------------
 (require 'workgroups)
 (workgroups-mode 1)
@@ -73,10 +82,10 @@
 
 ;;----------ido------------------------------------------
 ;; ido makes competing buffers and finding files easier
-(require 'ido) 
+(require 'ido)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
-(setq 
+(setq
   ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
 
   ido-ignore-buffers ;; ignore these guys
@@ -111,7 +120,3 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "#0C1021" :foreground "#F8F8F8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
-
-
-
-

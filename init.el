@@ -1,5 +1,6 @@
 (add-to-list 'load-path "~/.emacs.d")
-(add-to-list 'load-path "~/.emacs.d/setting")
+(add-to-list 'load-path "~/.emacs.d/settings")
+(add-to-list 'load-path "~/.emacs.d/plugins")
 (setq url-http-attempt-keepalives nil)
 (require 'package)
 (add-to-list 'package-archives
@@ -15,6 +16,13 @@
 (load "mydef")
 (load "plugin")
 (load "keymap")
+
+(load "leo-c")
+(load "leo-lisp")
+(load "leo-octave")
+(load "leo-python")
+(load "leo-tex")
+(load "leo-templates")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
