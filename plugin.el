@@ -33,15 +33,11 @@
 (require 'w3m-load)
 (require 'mime-w3m)
 
-;; (require 'skeleton)
-;; (setq skeleton-pair t)
-;; (global-set-key "\"" 'skeleton-pair-insert-maybe)
-;; (global-set-key "(" 'skeleton-pair-insert-maybe)
-;; (global-set-key "[" 'skeleton-pair-insert-maybe)
-;; (global-set-key "{" 'skeleton-pair-insert-maybe)
+
 ;;--------------------helm--------------------
 (require 'helm-config)
-
+(require 'projectile)
+(projectile-global-mode)
 ;;--------------------autopair--------------------
 (require 'autopair)
 (autopair-global-mode)
@@ -62,9 +58,6 @@
 (define-key ac-complete-mode-map "\r" nil)
 (define-key ac-complete-mode-map [return] nil)
 
-;;--------------------workgroup--------------------
-(require 'workgroups)
-(workgroups-mode 1)
 ;;----------dired----------------------
 (require 'dired+)
 (setq dired-recursive-copies (quote top))
