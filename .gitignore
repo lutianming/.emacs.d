@@ -1,0 +1,14 @@
+auto-save-list/
+backups/
+cache/
+el-get/
+elpa/
+eshell/
+plugins/
+url/
+*.dat
+ede-projects.el
+places
+session.*
+.session
+.smex*
