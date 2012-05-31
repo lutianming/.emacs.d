@@ -1,5 +1,5 @@
 ;;----------CEDET-------------------------------------------------
-(load-file "~/.emacs.d/plugins/cedet-1.1beta2/common/cedet.el")
+(load-file "~/.emacs.d/plugins/cedet-1.1/common/cedet.el")
 (global-srecode-minor-mode 1)
 (global-ede-mode 1)
 (semantic-load-enable-code-helpers)

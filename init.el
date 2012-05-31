@@ -18,7 +18,7 @@
 (load "plugin")
 (load "keymap")
 
-(load "leo-c")
+;;(load "leo-c")
 (load "leo-lisp")
 (load "leo-octave")
 (load "leo-python")

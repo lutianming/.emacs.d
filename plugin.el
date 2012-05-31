@@ -12,6 +12,7 @@
 ;;check my packages, install them if they are missing
 (defvar leo-packages '(starter-kit starter-kit-bindings starter-kit-eshell
                                    ac-slime auctex auto-complete dired+ flymake
+                                   helm autopair projectile session
                                    magit smex popup undo-tree yasnippet
                                    zenburn-theme color-theme-solarized))
 (defun leo-packages-installed-p ()
@@ -69,9 +70,6 @@
 
 (require 'session)
 (add-hook 'after-init-hook 'session-initialize)
-
-(require 'browse-kill-ring)
-(global-undo-tree-mode 1)
 
 ;;----------ido------------------------------------------
 ;; ido makes competing buffers and finding files easier
