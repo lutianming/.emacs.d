@@ -20,11 +20,13 @@
 (load "keymap")
 
 (load "leo-c")
-(load "leo-lisp")
-(load "leo-octave")
+(if (eq system-type 'gnu/linux)
+    (progn
+      (load "leo-lisp")
+      (load "leo-octave")
+      (load "leo-tex")
+      (load "leo-templates")))
 (load "leo-python")
-(load "leo-tex")
-(load "leo-templates")
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

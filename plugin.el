@@ -14,7 +14,7 @@
                                    ac-slime auctex auto-complete dired+ flymake
                                    helm autopair projectile session
                                    magit smex popup undo-tree yasnippet
-                                   zenburn-theme))
+                                   zenburn-theme rainbow-delimiters))
 (defun leo-packages-installed-p ()
   (loop for p in leo-packages
         when (not (package-installed-p p)) do (return nil)
@@ -31,8 +31,8 @@
 ;;----------------------------------------------
 
 ;----------w3m----------
-(require 'w3m-load)
-(require 'mime-w3m)
+;(require 'w3m-load)
+;(require 'mime-w3m)
 
 ;----------org----------
 (require 'org)
@@ -81,6 +81,7 @@
 (setq dired-recursive-deletes (quote top))
 (diredp-toggle-find-file-reuse-dir 1)
 ;;----------color-------------------------------------
+(require 'zenburn-theme)
 (load-theme 'zenburn t)
 ;;(load-theme 'solarized-dark t)
 
