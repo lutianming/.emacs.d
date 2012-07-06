@@ -25,6 +25,7 @@
       (autoload 'pymacs-load "pymacs" nil t)
       (autoload 'pymacs-autoload "pymacs")
       (require 'pycomplete)))
+
 ;;(eval-after-load "pymacs"
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 
