@@ -14,7 +14,7 @@
                                    ac-slime auctex auto-complete dired+ flymake
                                    helm autopair projectile session
                                    magit smex popup undo-tree yasnippet
-                                   zenburn-theme rainbow-delimiters))
+                                   zenburn-theme))
 (defun leo-packages-installed-p ()
   (loop for p in leo-packages
         when (not (package-installed-p p)) do (return nil)
@@ -71,9 +71,6 @@
 (yas/load-directory yas/root-directory)
 (setq-default yas/trigger-key "M-TAB")
 
-;;----------rainbow-delimiters--------
-(require 'rainbow-delimiters)
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 ;;----------dired----------------------
 (require 'dired+)
