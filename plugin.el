@@ -66,7 +66,7 @@
 
 ;;---------yasnippet----------------
 (require 'yasnippet)
-(yas/initialize)
+(yas-global-mode)
 (setq yas/root-directory "~/.emacs.d/mysnippets")
 (yas/load-directory yas/root-directory)
 (setq-default yas/trigger-key "M-TAB")
