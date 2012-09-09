@@ -11,9 +11,9 @@
 ;;----------------------------------------
 ;;check my packages, install them if they are not installed yet
 (defvar leo-packages '(starter-kit starter-kit-bindings starter-kit-eshell
-                                   ac-slime auctex auto-complete dired+ flymake
+                                   ac-slime auctex auto-complete yasnippet dired+ flymake
                                    helm autopair projectile session
-                                   magit smex popup undo-tree yasnippet
+                                   magit smex popup undo-tree
                                    zenburn-theme))
 (defun leo-packages-installed-p ()
   (loop for p in leo-packages
@@ -50,6 +50,7 @@
 
 ;;--------------------helm--------------------
 (require 'helm-config)
+(global-set-key (kbd "C-c h") 'helm-mini)
 (require 'projectile)
 (projectile-global-mode)
 ;;--------------------autopair--------------------
@@ -77,6 +78,7 @@
 (setq dired-recursive-copies (quote top))
 (setq dired-recursive-deletes (quote top))
 (diredp-toggle-find-file-reuse-dir 1)
+
 ;;----------color-------------------------------------
 (require 'zenburn-theme)
 (load-theme 'zenburn t)
