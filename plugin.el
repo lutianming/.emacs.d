@@ -14,7 +14,7 @@
                                    ac-slime auctex auto-complete yasnippet dired+ flymake
                                    helm autopair projectile session
                                    magit smex popup undo-tree
-                                   zenburn-theme))
+                                   zenburn-theme solarized-theme))
 (defun leo-packages-installed-p ()
   (loop for p in leo-packages
         when (not (package-installed-p p)) do (return nil)
@@ -80,9 +80,10 @@
 (diredp-toggle-find-file-reuse-dir 1)
 
 ;;----------color-------------------------------------
-(require 'zenburn-theme)
-(load-theme 'zenburn t)
-;;(load-theme 'solarized-dark t)
+;;(require 'zenburn-theme)
+;;(load-theme 'zenburn t)
+(require 'solarized)
+(load-theme 'solarized-dark t)
 
 (require 'session)
 (add-hook 'after-init-hook 'session-initialize)
