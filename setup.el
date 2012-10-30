@@ -24,7 +24,7 @@
 (setq shell-popd-regexp nil)
 ;;页面平滑滚动
 (setq scroll-margin 5
- scroll-conservatively 10000)
+      scroll-conservatively 10000)
 
 (setq ispell-program-name "aspell")
 (ispell-change-dictionary "american" t)
@@ -38,3 +38,24 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (setq next-line-add-newlines t)
+
+(add-hook 'before-make-frame-hook
+          #'(lambda ()
+              (add-to-list 'default-frame-alist '(left . 0))
+              (add-to-list 'default-frame-alist '(top . 0 ))
+              (add-to-list 'default-frame-alist '(height . 40))
+              (add-to-list 'default-frame-alist '(width . 80))))
+
+;;auto indent after yank
+(dolist (command '(yank yank-pop))
+  (eval `(defadvice ,command (after indent-region activate)
+           (and (not current-prefix-arg)
+                (member major-mode '(emacs-lisp-mode lisp-mode
+                                                     clojure-mode    scheme-mode
+                                                     haskell-mode    ruby-mode
+                                                     rspec-mode
+                                                     c-mode          c++-mode
+                                                     objc-mode       latex-mode
+                                                     plain-tex-mode))
+                (let ((mark-even-if-inactive transient-mark-mode))
+                  (indent-region (region-beginning) (region-end) nil))))))

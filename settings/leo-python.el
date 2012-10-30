@@ -8,13 +8,22 @@
                          #'autopair-python-triple-quote-action))))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(add-to-list 'load-path "~/.emacs.d/plugins/python-mode.el-6.0.10")
-(setq py-install-directory "~/.emacs.d/plugins/python-mode.el-6.0.10/")
 (require 'python-mode)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-(add-to-list 'interpreter-mode-alist '("ipython3" . python-mode))
-(setq py-shell-name "/usr/bin/ipython3")
-(autoload 'python-mode "python-mode" "Python editing mode." t)
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
+(setq-default py-shell-name "ipython")
+(setq-default py-which-bufname "IPython")
+(setq py-python-command-args
+      '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
+(setq py-force-py-shell-name-p t)
+
+; switch to the interpreter after executing code
+(setq py-shell-switch-buffers-on-execute-p t)
+(setq py-switch-buffers-on-execute-p t)
+; don't split windows
+(setq py-split-windows-on-execute-p nil)
+; try to automagically figure out indentation
+(setq py-smart-indentation t)
 
 (if (eq system-type 'gnu/linux)
     (progn
@@ -26,6 +35,10 @@
       (autoload 'pymacs-autoload "pymacs")
       (require 'pycomplete)))
 
+(require 'pymacs)
+(pymacs-load "ropemacs" "rope-")
+
+(require 'virtualenv)
 ;;(eval-after-load "pymacs"
 ;;  '(add-to-list 'pymacs-load-path YOUR-PYMACS-DIRECTORY"))
 

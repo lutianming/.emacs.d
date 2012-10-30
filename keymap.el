@@ -14,3 +14,6 @@
 (global-set-key (kbd "C-.") 'undo-tree-undo)
 (global-set-key (kbd "C-/") 'undo-tree-redo)
 (global-set-key (kbd "C-c C-f") 'open-note)
+
+(recentf-mode 1)
+(global-set-key (kbd "C-x C-r") 'recentf-open-files)

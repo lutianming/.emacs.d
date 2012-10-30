@@ -51,13 +51,15 @@
 ;;--------------------helm--------------------
 (require 'helm-config)
 (global-set-key (kbd "C-c h") 'helm-mini)
+
 (require 'projectile)
 (projectile-global-mode)
 ;;--------------------autopair--------------------
 (require 'autopair)
 (autopair-global-mode)
-(add-hook 'lisp-mode-hook
-          '(lambda () (setq autopair-dont-activate t)))
+(defun turn-off-autopair-mode () (autopair-mode -1))
+(add-hook 'lisp-mode-hook 'turn-off-autopair-mode)
+(add-hook 'emacs-lisp-mode-hook 'turn-off-autopair-mode)
 
 ;;----------auto-complete-----------------------------------
 (require 'auto-complete-config)
@@ -72,12 +74,23 @@
 (yas/load-directory yas/root-directory)
 (setq-default yas/trigger-key "M-TAB")
 
+;;----------fill-column-indicator----------
+(require 'fill-column-indicator)
+(setq-default fill-column 72)
+(setq fci-rule-width 2)
+(define-globalized-minor-mode
+  global-fci-mode fci-mode (lambda () (fci-mode 1)))
+(global-fci-mode 1)
 
 ;;----------dired----------------------
 (require 'dired+)
 (setq dired-recursive-copies (quote top))
 (setq dired-recursive-deletes (quote top))
 (diredp-toggle-find-file-reuse-dir 1)
+
+;;----------auto-indent----------
+;;(require 'auto-indent-mode)
+;;(auto-indent-global-mode)
 
 ;;----------color-------------------------------------
 ;;(require 'zenburn-theme)
@@ -91,6 +104,9 @@
 ;;----------undo-tree----------
 (require 'undo-tree)
 (undo-tree-mode)
+
+;;----------fvwm----------
+(require 'fvwm-mode)
 
 ;;----------ido------------------------------------------
 ;; ido makes competing buffers and finding files easier
@@ -120,15 +136,54 @@
 ;; when using ido, the confirmation is rather annoying...
 (setq confirm-nonexistent-file-or-buffer nil)
 
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- )
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#0C1021" :foreground "#F8F8F8" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 98 :width normal :foundry "unknown" :family "DejaVu Sans Mono")))))
+;;----------ibuffer----------
+(autoload 'ibuffer "ibuffer" "List buffers." t)
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+               ("Programming" ;; prog stuff not already in MyProjectX
+                (or
+                 (mode . c-mode)
+                 (mode . c++-mode)
+                 (mode . python-mode)
+                 (mode . emacs-lisp-mode)
+                 (mode . lisp-mode)
+                 (mode . sql-mode)
+                 (mode . html-mode)
+                 (mode . js2-mode)
+                 (mode . pascal-mode)
+                 (mode . makefile-gmake-mode)
+                 (mode . nxml-mode)
+                 (mode . yaml-mode)
+                 (mode . sh-mode)
+                 (mode . rst-mode)
+                 (mode . go-mode)
+                 (mode . po-mode)
+                 ;; etc
+                 ))
+               ("Dired"
+                (or
+                 (mode . dired-mode)))
+               ("Version Control"
+                (or
+                 (mode . magit-mode)
+                 (name . "^*magit")
+                 (mode . ahg-status-mode)))
+               ("Org" ;; all org-related buffers
+                (or
+                 (mode . org-mode)
+                 (mode . org-agenda-mode)
+                 (mode . diary-mode)
+                 (mode . calendar-mode)
+                 (name . "^*Fancy Diary")
+                 ))
+               ("Emacs"
+                (or
+                 (name . "^\\*scratch\\*$")
+                 (name . "^\\*Messages\\*$")
+                 (name . "^\\*ielm\\*$")
+                 (mode . help-mode)))
+               ))))
+
+(add-hook 'ibuffer-mode-hook
+          (lambda ()
+            (ibuffer-switch-to-saved-filter-groups "default")))
