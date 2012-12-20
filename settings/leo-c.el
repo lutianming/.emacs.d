@@ -1,29 +1,12 @@
 ;;----------CEDET-------------------------------------------------
+(load-file "~/.emacs.d/plugins/cedet/cedet-devel-load.el")
+(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-completions-mode)
+(semantic-mode 1)
+(require 'semantic/ia)
+(require 'semantic/bovine/gcc)
 
-(global-srecode-minor-mode 1)
-(global-ede-mode 1)
-(semantic-load-enable-code-helpers)
-;; (require 'semantic-ia)
-;; (require 'semantic-gcc)
-;; (require 'cc-mode)
-;; (define-key c-mode-base-map (kbd "M-n") 'semantic-ia-complete-symbol-menu) ;;补全
-
-;; ;;h/cpp切换
-;; (require 'eassist nil 'noerror)
-;; (define-key c-mode-base-map [M-f12] 'eassist-switch-h-cpp)
-
-;; ;;代码折叠
-;; (require 'semantic-tag-folding nil 'noerror)
-;; (global-semantic-tag-folding-mode 1)
-
-;; ;;代码生成
-;; ;;;; Custom template for srecode
-;; (setq srecode-map-load-path
-;;   (list (srecode-map-base-template-dir)
-;;     (expand-file-name "~/.emacs.d/plugins/cedet-1.1/srecode")
-;;     ))
-
-;;----------ECB-------------------------------------------------
-;(require 'ecb)
-;(ecb-minor-mode)
-;(setq ecb-tip-of-the-day nil)
+(require 'ascope)
+(require 'xcscope)

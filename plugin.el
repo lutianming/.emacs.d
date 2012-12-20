@@ -16,9 +16,12 @@
                                    magit smex popup undo-tree
                                    zenburn-theme solarized-theme))
 (defun leo-packages-installed-p ()
-  (loop for p in leo-packages
-        when (not (package-installed-p p)) do (return nil)
-        finally (return t)))
+  (let ((result t))
+    (dolist (p leo-packages result)
+      (when (not (package-installed-p p))
+        (setq result nil)
+        (break)))
+    (setq result result)))
 (unless (leo-packages-installed-p)
   (message "%s" "refresh package database")
   (package-refresh-contents)
@@ -27,26 +30,13 @@
   (dolist (p leo-packages)
     (when (not (package-installed-p p))
       (package-install p))))
+
 ;;----------end checking packages---------
 ;;----------------------------------------------
 
 ;----------w3m----------
 ;(require 'w3m-load)
 ;(require 'mime-w3m)
-
-;----------org----------
-(require 'org)
-(setq org-directory "~/SparkleShare/gtd/")
-(global-set-key (kbd "<f8>") 'org-capture)
-(setq org-capture-templates
-      '(("t" "Todo" entry (file+headline (concat org-directory "task.org") "Tasks")
-         "* TODO %?\n  \t %i\n %a")
-        ("n" "Note" entry (file+headline (concat org-directory "note.org") "Notes")
-         "* %?\n")
-        ("i" "Idea" entry (file+headline (concat org-directory "task.org") "Ideas")
-         "* ")
-        ("c" "Calendar" entry (file+datetree (concat org-directory "calendar.org"))
-         "* %?\nEntered on %U\n  %i\n  %a")))
 
 ;;--------------------helm--------------------
 (require 'helm-config)
@@ -72,22 +62,19 @@
 (yas-global-mode)
 (setq yas/root-directory "~/.emacs.d/mysnippets")
 (yas/load-directory yas/root-directory)
-(setq-default yas/trigger-key "M-TAB")
+(setq-default yas-trigger-key "M-TAB")
 
-;;----------fill-column-indicator----------
-(require 'fill-column-indicator)
-(setq-default fill-column 72)
-(setq fci-rule-width 2)
-(define-globalized-minor-mode
-  global-fci-mode fci-mode (lambda () (fci-mode 1)))
-(global-fci-mode 1)
 
 ;;----------dired----------------------
 (require 'dired+)
-(setq dired-recursive-copies (quote top))
-(setq dired-recursive-deletes (quote top))
+(global-set-key (kbd "C-x d") 'diredp-dired-files)
+(global-set-key (kbd "C-x C-d") 'diredp-dired-files-other-window)
+(setq dired-recursive-copies 'top)
+(setq dired-recursive-deletes 'top)
 (diredp-toggle-find-file-reuse-dir 1)
 
+;;----------bookmark+----------
+(require 'bookmark+)
 ;;----------auto-indent----------
 ;;(require 'auto-indent-mode)
 ;;(auto-indent-global-mode)
@@ -95,22 +82,20 @@
 ;;----------color-------------------------------------
 ;;(require 'zenburn-theme)
 ;;(load-theme 'zenburn t)
-(require 'solarized)
+;;(require 'solarized)
 (load-theme 'solarized-dark t)
 
 (require 'session)
 (add-hook 'after-init-hook 'session-initialize)
 
 ;;----------undo-tree----------
-(require 'undo-tree)
+;;(require 'undo-tree)
 (undo-tree-mode)
 
-;;----------fvwm----------
-(require 'fvwm-mode)
 
 ;;----------ido------------------------------------------
 ;; ido makes competing buffers and finding files easier
-(require 'ido)
+(ido-mode t)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
 (setq
@@ -158,6 +143,7 @@
                  (mode . rst-mode)
                  (mode . go-mode)
                  (mode . po-mode)
+                 (mode . css-mode)
                  ;; etc
                  ))
                ("Dired"
@@ -181,6 +167,7 @@
                  (name . "^\\*scratch\\*$")
                  (name . "^\\*Messages\\*$")
                  (name . "^\\*ielm\\*$")
+                 (name . "^\\*Packages\\*$")
                  (mode . help-mode)))
                ))))
 

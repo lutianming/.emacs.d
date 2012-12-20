@@ -1,6 +1,7 @@
 ;;--------------------Latex--------------------
 (require 'tex-site)
 
+(setq Tex-global-PDF-mode t)
 (setq TeX-auto-save t)
 (setq TeX-auto-untabify t)
 (setq TeX-show-compilation t)
@@ -17,4 +18,3 @@
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(add-hook 'LaTeX-mode-hook 'Tex-global-PDF-mode)

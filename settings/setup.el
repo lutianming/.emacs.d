@@ -26,6 +26,7 @@
 (setq scroll-margin 5
       scroll-conservatively 10000)
 
+;;----------flyspell----------
 (setq ispell-program-name "aspell")
 (ispell-change-dictionary "american" t)
 
@@ -44,7 +45,7 @@
               (add-to-list 'default-frame-alist '(left . 0))
               (add-to-list 'default-frame-alist '(top . 0 ))
               (add-to-list 'default-frame-alist '(height . 40))
-              (add-to-list 'default-frame-alist '(width . 80))))
+              (add-to-list 'default-frame-alist '(width . 90))))
 
 ;;auto indent after yank
 (dolist (command '(yank yank-pop))
@@ -53,7 +54,7 @@
                 (member major-mode '(emacs-lisp-mode lisp-mode
                                                      clojure-mode    scheme-mode
                                                      haskell-mode    ruby-mode
-                                                     rspec-mode
+                                                     rspec-mode      nxml-mode
                                                      c-mode          c++-mode
                                                      objc-mode       latex-mode
                                                      plain-tex-mode))

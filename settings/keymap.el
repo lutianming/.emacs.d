@@ -13,7 +13,10 @@
 (global-set-key (kbd "C-c k") 'kill-ring-save)
 (global-set-key (kbd "C-.") 'undo-tree-undo)
 (global-set-key (kbd "C-/") 'undo-tree-redo)
-(global-set-key (kbd "C-c C-f") 'open-note)
+
+(global-set-key (kbd "M-;") 'comment-dwim)
+(global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 
 (recentf-mode 1)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
+(global-set-key (kbd "RET") 'newline-and-indent)

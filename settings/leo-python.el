@@ -25,18 +25,18 @@
 ; try to automagically figure out indentation
 (setq py-smart-indentation t)
 
-(if (eq system-type 'gnu/linux)
-    (progn
-      (autoload 'pymacs-apply "pymacs")
-      (autoload 'pymacs-call "pymacs")
-      (autoload 'pymacs-eval "pymacs" nil t)
-      (autoload 'pymacs-exec "pymacs" nil t)
-      (autoload 'pymacs-load "pymacs" nil t)
-      (autoload 'pymacs-autoload "pymacs")
-      (require 'pycomplete)))
+;; (if (eq system-type 'gnu/linux)
+;;     (progn
+;;       (autoload 'pymacs-apply "pymacs")
+;;       (autoload 'pymacs-call "pymacs")
+;;       (autoload 'pymacs-eval "pymacs" nil t)
+;;       (autoload 'pymacs-exec "pymacs" nil t)
+;;       (autoload 'pymacs-load "pymacs" nil t)
+;;       (autoload 'pymacs-autoload "pymacs")
+;;       (require 'pycomplete)))
 
-(require 'pymacs)
-(pymacs-load "ropemacs" "rope-")
+;; (require 'pymacs)
+;; (pymacs-load "ropemacs" "rope-")
 
 (require 'virtualenv)
 ;;(eval-after-load "pymacs"

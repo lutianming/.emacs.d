@@ -12,3 +12,5 @@ places
 session.*
 .session
 .smex*
+bookmarks
+*.cache

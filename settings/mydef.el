@@ -35,9 +35,3 @@ Emacs buffers are those whose name starts with *."
   (let ((i 0))
     (while (and (not (string-match "^*" (buffer-name))) (< i 50))
       (setq i (1+ i)) (previous-buffer) )))
-
-(defun open-note ()
-  "open or create a new note in ~/SparkleShare/gtd/"
-  (interactive)
-  (ido-find-file-in-dir org-directory)
-  )

@@ -1,4 +1,5 @@
-(add-hook 'html-mode-hook
-          (lambda ()
-            (set (make-local-variable 'sgml-xml-mode) t)))
+(add-to-list 'auto-mode-alist '("\\.html" . nxml-mode))
+(add-hook 'nxml-mode-hook 'turn-off-flyspell)
 (setq nxml-child-indent 2)
+(setq nxml-sl)
+(setq nxml-slash-auto-complete-flag t)
