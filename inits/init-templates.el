@@ -45,3 +45,5 @@
         (narrow-to-region (match-beginning 0) (match-end 0))
         (replace-match "")
         (insert-today)))))
+
+(provide 'init-templates)

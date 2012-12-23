@@ -20,3 +20,5 @@
 (recentf-mode 1)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 (global-set-key (kbd "RET") 'newline-and-indent)
+
+(provide 'init-keymap)

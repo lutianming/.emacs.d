@@ -5,3 +5,5 @@
               (format-time-string "%Y-%m-%d-")
               title
               ".org")))
+
+(provide 'init-blog)

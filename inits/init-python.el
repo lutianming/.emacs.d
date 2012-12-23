@@ -1,4 +1,4 @@
-;;--------------------python--------------------
+(require 'python-mode)
 (add-hook 'python-mode-hook
           '(lambda ()
              (push '(?' . ?')
@@ -6,9 +6,6 @@
              (setq autopair-handle-action-fns
                    (list #'autopair-default-handle-action
                          #'autopair-python-triple-quote-action))))
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-(require 'python-mode)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 (setq-default py-shell-name "ipython")
@@ -45,3 +42,5 @@
 
 ;(require 'pysmell)
 ;(add-hook 'python-mode-hook (lambda () (pysmell-mode 1)))
+
+(provide 'init-python)

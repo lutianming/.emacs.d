@@ -1,4 +1,3 @@
-;;----------CEDET-------------------------------------------------
 (load-file "~/.emacs.d/plugins/cedet/cedet-devel-load.el")
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
@@ -10,3 +9,5 @@
 
 (require 'ascope)
 (require 'xcscope)
+
+(provide 'init-c)

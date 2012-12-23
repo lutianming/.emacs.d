@@ -26,3 +26,5 @@
 
 ;; run an inferior Octave process in a special Emacs buffer
 (autoload 'run-octave "octave-inf" nil t)
+
+(provide 'init-octave)

@@ -61,3 +61,5 @@
         ("org" :components ("org-lutianming"))
 
         ))
+
+(provide 'init-org)

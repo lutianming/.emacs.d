@@ -1,4 +1,3 @@
-(server-start)
 (setq default-major-mode 'text-mode);一打开就起用 text 模式。
 (setq global-font-lock-mode t);语法高亮
 (setq auto-image-file-mode t);打开图片显示功能
@@ -60,3 +59,5 @@
                                                      plain-tex-mode))
                 (let ((mark-even-if-inactive transient-mark-mode))
                   (indent-region (region-beginning) (region-end) nil))))))
+
+(provide 'init-setup)

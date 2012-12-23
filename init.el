@@ -1,43 +1,42 @@
 (defvar *emacs-load-start* (current-time))
 (require 'cl)
-(setq custom-file "~/.emacs.d/custom.el")
+
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
+(setq custom-file (expand-file-name
+                   "custom.el" user-emacs-directory))
 (load custom-file 'noerror)
-
 (setq debug-on-error t)
-(add-to-list 'load-path "~/.emacs.d")
 
-(require 'package)
-(add-to-list 'package-archives
-             '("gnu" . "http://elpa.gnu.org/packages/") t)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-             '("tromey" . "http://tromey.com/elpa/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
+(add-to-list 'load-path user-emacs-directory)
+(add-to-list 'load-path (expand-file-name
+                         "inits" user-emacs-directory))
 
-(load "plugin")
-;; (load "setup")
-;; (load "mydef")
-;; (load "keymap")
+(require 'init-packages)
+(require 'init-setup)
+(require 'init-def)
+(require 'init-ido)
+(require 'init-ibuffer)
+(require 'init-dired)
+(require 'init-misc)
+(require 'init-code-complete)
+(require 'init-keymap)
+(require 'init-theme)
+(require 'init-blog)
 
-(eval-after-load 'load-dir
-  '(progn
-     (setq load-dirs "~/.emacs.d/settings")))
-;; (load "leo-xml")
-;; (load "leo-c")
-;; (load "leo-org")
-;; (if (eq system-type 'gnu/linux)
-;;     (progn
-;;       (load "leo-lisp")
-;;       (load "leo-octave")
-;;       (load "leo-haskell")
-;;       (load "leo-tex")
-;;       (load "leo-templates")))
-;; (load "leo-python")
-(if (eq system-type 'windows-nt)
-    (setq magit-git-executable "D:\\Program Files (x86)\\Git\\bin\\git"))
+(eval-after-load 'c++-mode '(require 'init-c))
+(eval-after-load 'c-mode '(require 'init-c))
+(eval-after-load 'python-mode '(require 'init-python))
+(eval-after-load 'org-mode '(require 'init-org))
+(eval-after-load 'markdown-mode '(require 'init-markdown))
+(eval-after-load 'octave-mode '(require 'init-octave))
+(eval-after-load 'lisp-mode '(require 'init-lisp))
+(eval-after-load 'TeX-mode '(require 'init-tex))
+(eval-after-load 'html-mode '(require 'init-xml))
+(eval-after-load 'xml-mode '(require 'init-xml))
 
+;;----start speed-----
 (message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
                                      (- (+ hi lo) (+ (first *emacs-load-start*) (second *emacs-load-start*)))))

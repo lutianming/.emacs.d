@@ -3,3 +3,5 @@
 (setq nxml-child-indent 2)
 (setq nxml-sl)
 (setq nxml-slash-auto-complete-flag t)
+
+(provide 'init-xml)
