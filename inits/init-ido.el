@@ -26,4 +26,5 @@
 ;; when using ido, the confirmation is rather annoying...
 (setq confirm-nonexistent-file-or-buffer nil)
 
+(global-set-key (kbd "C-x b") 'ido-switch-buffer)
 (provide 'init-ido)

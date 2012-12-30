@@ -36,4 +36,9 @@ Emacs buffers are those whose name starts with *."
     (while (and (not (string-match "^*" (buffer-name))) (< i 50))
       (setq i (1+ i)) (previous-buffer) )))
 
-(provide 'init-def)
+(global-set-key (kbd "<C-prior>") 'previous-user-buffer) ; Ctrl+PageUp
+(global-set-key (kbd "<C-next>") 'next-user-buffer) ; Ctrl+PageDown
+(global-set-key (kbd "<C-S-prior>") 'previous-emacs-buffer) ; Ctrl+Shift+PageUp
+(global-set-key (kbd "<C-S-next>") 'next-emacs-buffer) ; Ctrl+Shift+PageDown
+
+(provide 'buffer-defuns)

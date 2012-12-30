@@ -19,4 +19,7 @@
 ;(require 'w3m-load)
 ;(require 'mime-w3m)
 
+(require 'diminish)
+(eval-after-load "yasnippet" '(diminish 'yas-minor-mode "Y"))
+
 (provide 'init-misc)

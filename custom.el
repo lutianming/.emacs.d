@@ -10,4 +10,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(safe-local-variable-values (quote ((virtualenv-workon . "pelican_dev") (whitespace-line-column . 80) (lexical-binding . t))))
  '(session-use-package t nil (session)))

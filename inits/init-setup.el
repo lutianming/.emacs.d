@@ -25,6 +25,13 @@
 (setq scroll-margin 5
       scroll-conservatively 10000)
 
+
+;; Auto refresh buffers
+(global-auto-revert-mode 1)
+;; Also auto refresh dired, but be quiet about it
+(setq global-auto-revert-non-file-buffers t)
+(setq auto-revert-verbose nil)
+
 ;;----------flyspell----------
 (setq ispell-program-name "aspell")
 (ispell-change-dictionary "american" t)
@@ -37,7 +44,6 @@
  version-control t)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(setq next-line-add-newlines t)
 
 (add-hook 'before-make-frame-hook
           #'(lambda ()
@@ -45,19 +51,5 @@
               (add-to-list 'default-frame-alist '(top . 0 ))
               (add-to-list 'default-frame-alist '(height . 40))
               (add-to-list 'default-frame-alist '(width . 90))))
-
-;;auto indent after yank
-(dolist (command '(yank yank-pop))
-  (eval `(defadvice ,command (after indent-region activate)
-           (and (not current-prefix-arg)
-                (member major-mode '(emacs-lisp-mode lisp-mode
-                                                     clojure-mode    scheme-mode
-                                                     haskell-mode    ruby-mode
-                                                     rspec-mode      nxml-mode
-                                                     c-mode          c++-mode
-                                                     objc-mode       latex-mode
-                                                     plain-tex-mode))
-                (let ((mark-even-if-inactive transient-mark-mode))
-                  (indent-region (region-beginning) (region-end) nil))))))
 
 (provide 'init-setup)

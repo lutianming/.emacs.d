@@ -37,13 +37,13 @@
 (setq org-publish-project-alist
       '(
 
-        ("org-lutianming"
+        ("blog"
          ;; Path to your org files.
-         :base-directory "~/Workspace/lutianming.github.com/org"
+         :base-directory "~/Workspace/blog.raw/org"
          :base-extension "org"
 
-         ;; Path to your Jekyll project.
-         :publishing-directory "~/Workspace/lutianming.github.com/_posts"
+         ;; Path to your blog project.
+         :publishing-directory "~/Workspace/blog.raw/content"
          :recursive t
          :publishing-function org-publish-org-to-html
          :headline-levels 4
@@ -51,15 +51,14 @@
          :body-only t ;; Only export section between <body> </body>
          )
 
-        ("org-static"
-         :base-directory "~/Workspace/lutianming.github.com/assets/"
-         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
-         :publishing-directory "~/Workspace/lutianming.github.com/assets"
-         :recursive t
-         :publishing-function org-publish-attachment)
+        ;; ("org-static"
+        ;;  :base-directory "~/Workspace/blog.raw/output/theme"
+        ;;  :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
+        ;;  :publishing-directory "~/Workspace/lutianming.github.com/assets"
+        ;;  :recursive t
+        ;;  :publishing-function org-publish-attachment)
 
-        ("org" :components ("org-lutianming"))
-
+        ("org" :components ("blog"))
         ))
 
 (provide 'init-org)
