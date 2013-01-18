@@ -22,6 +22,12 @@
 ; try to automagically figure out indentation
 (setq py-smart-indentation t)
 
+(require 'jedi)
+(autoload 'jedi:setup "jedi" nil t)
+(add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook 'jedi:ac-setup)
+(setq jedi:setup-keys t)
+
 ;; (if (eq system-type 'gnu/linux)
 ;;     (progn
 ;;       (autoload 'pymacs-apply "pymacs")

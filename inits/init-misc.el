@@ -21,5 +21,6 @@
 
 (require 'diminish)
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode "Y"))
+(eval-after-load "projectile" '(diminish 'projectile-mode "proj"))
 
 (provide 'init-misc)

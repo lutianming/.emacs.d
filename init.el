@@ -15,10 +15,13 @@
 (require 'init-setup)
 (require 'init-ido)
 (require 'init-ibuffer)
-(require 'init-dired)
-(require 'init-misc)
-(require 'init-magit)
 (require 'init-code-complete)
+
+(require 'init-dired)
+(require 'init-window)
+(require 'init-misc)
+;(require 'init-magit)
+
 (require 'init-theme)
 (require 'init-blog)
 
@@ -27,6 +30,7 @@
 (require 'init-editing)
 
 (require 'init-org)
+(require 'init-xml)
 (eval-after-load 'c++-mode '(require 'init-c))
 (eval-after-load 'c-mode '(require 'init-c))
 (eval-after-load 'python-mode '(require 'init-python))
@@ -34,8 +38,7 @@
 (eval-after-load 'octave-mode '(require 'init-octave))
 (eval-after-load 'lisp-mode '(require 'init-lisp))
 (eval-after-load 'TeX-mode '(require 'init-tex))
-(eval-after-load 'html-mode '(require 'init-xml))
-(eval-after-load 'xml-mode '(require 'init-xml))
+
 
 (setq custom-file (expand-file-name
                    "custom.el" user-emacs-directory))

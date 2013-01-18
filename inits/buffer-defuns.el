@@ -38,7 +38,7 @@ Emacs buffers are those whose name starts with *."
 
 (global-set-key (kbd "<C-prior>") 'previous-user-buffer) ; Ctrl+PageUp
 (global-set-key (kbd "<C-next>") 'next-user-buffer) ; Ctrl+PageDown
-(global-set-key (kbd "<C-S-prior>") 'previous-emacs-buffer) ; Ctrl+Shift+PageUp
-(global-set-key (kbd "<C-S-next>") 'next-emacs-buffer) ; Ctrl+Shift+PageDown
+(global-set-key (kbd "<C-M-prior>") 'previous-emacs-buffer) ; Ctrl+Shift+PageUp
+(global-set-key (kbd "<C-M-next>") 'next-emacs-buffer) ; Ctrl+Shift+PageDown
 
 (provide 'buffer-defuns)

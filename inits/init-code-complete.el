@@ -8,6 +8,7 @@
 ;;----------auto-complete-----------------------------------
 (require 'auto-complete-config)
 (ac-config-default)
+(setq ac-auto-start t)
 (define-key ac-complete-mode-map "\r" nil)
 (define-key ac-complete-mode-map [return] nil)
 
