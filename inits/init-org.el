@@ -1,4 +1,4 @@
-;----------org----------
+;; org for GTD
 (setq org-directory "~/Dropbox/Documents/org/")
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 (defun open-note ()
@@ -33,24 +33,23 @@
                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 (setq org-latex-to-pdf-process '("texi2dvi --pdf --clean --verbose --batch %f"))
 
-;;org to html
+;;org for blog
 (setq org-publish-project-alist
-      '(
-
-        ("blog"
+      '(("blog"
          ;; Path to your org files.
-         :base-directory "~/Workspace/blog.raw/org"
+         :base-directory "~/Workspace/site.flask/org/"
          :base-extension "org"
 
          ;; Path to your blog project.
-         :publishing-directory "~/Workspace/blog.raw/content"
+         :publishing-directory "~/Workspace/site.flask/pages/"
          :recursive t
+         :htmlized-source t
          :publishing-function org-publish-org-to-html
          :headline-levels 4
          :html-extension "html"
          :body-only t ;; Only export section between <body> </body>
+         :table-of-contents nil
          )
-
         ;; ("org-static"
         ;;  :base-directory "~/Workspace/blog.raw/output/theme"
         ;;  :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
@@ -61,4 +60,5 @@
         ("org" :components ("blog"))
         ))
 
+(setq org-src-fontify-natively t)
 (provide 'init-org)

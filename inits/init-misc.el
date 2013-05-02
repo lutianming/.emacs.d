@@ -23,4 +23,7 @@
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode "Y"))
 (eval-after-load "projectile" '(diminish 'projectile-mode "proj"))
 
+;----------gnus---------
+;(setq gnus-init-file '~/.emacs.d/gnus.el)
+
 (provide 'init-misc)

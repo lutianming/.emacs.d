@@ -12,6 +12,11 @@
 (global-set-key (kbd "M-;") 'comment-dwim)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
 
+(global-set-key (kbd "M-j")
+                (lambda ()
+                  (interactive)
+                  (join-line -1)))
+
 (recentf-mode 1)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
 
