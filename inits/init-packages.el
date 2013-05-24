@@ -21,28 +21,28 @@
 
 ;;----------------------------------------
 ;;check my packages, install them if they are not installed yet
-(defvar leo-packages '(starter-kit starter-kit-bindings starter-kit-eshell
-                                   ac-slime auctex auto-complete yasnippet dired+ flymake
-                                   helm autopair projectile session
-                                   magit smex popup undo-tree
-                                   zenburn-theme solarized-theme))
-(defun leo-packages-installed-p ()
-  (let ((result t))
-    (dolist (p leo-packages result)
-      (when (not (package-installed-p p))
-        (setq result nil)
-        (break)))
-    (setq result result)))
+;; (defvar leo-packages '(starter-kit starter-kit-bindings starter-kit-eshell
+;;                                    ac-slime auctex auto-complete yasnippet dired+ flymake
+;;                                    helm autopair projectile session
+;;                                    magit smex popup undo-tree
+;;                                    zenburn-theme solarized-theme))
+;; (defun leo-packages-installed-p ()
+;;   (let ((result t))
+;;     (dolist (p leo-packages result)
+;;       (when (not (package-installed-p p))
+;;         (setq result nil)
+;;         (break)))
+;;     (setq result result)))
 
-;;check installed packages
-(unless (leo-packages-installed-p)
-  (message "%s" "refresh package database")
-  (package-refresh-contents)
-  (message "%s" "done")
-  ;;install missing packages
-  (dolist (p leo-packages)
-    (when (not (package-installed-p p))
-      (package-install p))))
-;;----------end checking packages---------
+;; ;;check installed packages
+;; (unless (leo-packages-installed-p)
+;;   (message "%s" "refresh package database")
+;;   (package-refresh-contents)
+;;   (message "%s" "done")
+;;   ;;install missing packages
+;;   (dolist (p leo-packages)
+;;     (when (not (package-installed-p p))
+;;       (package-install p))))
+;; ;;----------end checking packages---------
 
 (provide 'init-packages)

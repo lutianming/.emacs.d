@@ -34,4 +34,18 @@
                 (let ((mark-even-if-inactive transient-mark-mode))
                   (indent-region (region-beginning) (region-end) nil))))))
 
+(require 'expand-region)
+(global-set-key (kbd "M-]") 'er/expand-region)
+(global-set-key (kbd "M-[") 'er/contract-region)
+
+(require 'region-bindings-mode)
+(region-bindings-mode-enable)
+
+(require 'multiple-cursors)
+
+(define-key region-bindings-mode-map "e" 'mc/edit-lines)
+(define-key region-bindings-mode-map "a" 'mc/mark-all-like-this)
+(define-key region-bindings-mode-map "n" 'mc/mark-next-like-this)
+(define-key region-bindings-mode-map "p" 'mc/mark-previous-like-this)
+
 (provide 'init-editing)

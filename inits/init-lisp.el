@@ -24,4 +24,7 @@
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 
+(require 'paredit)
+(define-key paredit-mode-map (kbd "M-(") 'paredit-wrap-round)
+
 (provide 'init-lisp)

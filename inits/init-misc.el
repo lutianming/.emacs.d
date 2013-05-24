@@ -26,4 +26,5 @@
 ;----------gnus---------
 ;(setq gnus-init-file '~/.emacs.d/gnus.el)
 
+(require 'sr-speedbar)
 (provide 'init-misc)
