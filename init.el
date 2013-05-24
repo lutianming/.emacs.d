@@ -35,6 +35,7 @@
 (require 'init-ido)
 (require 'init-ibuffer)
 (require 'init-code-complete)
+(require 'init-pair)
 
 (require 'init-dired)
 (require 'init-window)

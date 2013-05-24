@@ -1,3 +1,5 @@
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;;----------bookmark+----------
 (require 'bookmark+)
 
@@ -5,7 +7,7 @@
 (add-hook 'after-init-hook 'session-initialize)
 
 ;;----------undo-tree----------
-;;(require 'undo-tree)
+(require 'undo-tree)
 (undo-tree-mode)
 
 ;;--------------------helm--------------------
@@ -27,8 +29,5 @@
 ;(setq gnus-init-file '~/.emacs.d/gnus.el)
 
 (require 'sr-speedbar)
-
-(require 'rainbow-delimiters)
-(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 (provide 'init-misc)
