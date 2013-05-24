@@ -27,4 +27,8 @@
 ;(setq gnus-init-file '~/.emacs.d/gnus.el)
 
 (require 'sr-speedbar)
+
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
 (provide 'init-misc)
