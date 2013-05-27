@@ -40,7 +40,7 @@
 (require 'init-dired)
 (require 'init-window)
 (require 'init-misc)
-;(require 'init-magit)
+(require 'init-magit)
 
 (require 'init-theme)
 (require 'init-blog)
@@ -51,7 +51,7 @@
 
 (eval-after-load 'org '(require 'init-org))
 (eval-after-load 'nxml-mode '(require 'init-xml))
-(eval-after-load 'cc-mode'(require 'init-cc))
+;;(eval-after-load 'cc-mode'(require 'init-cc))
 (eval-after-load 'python-mode '(require 'init-python))
 (eval-after-load 'markdown-mode '(require 'init-markdown))
 (eval-after-load 'octave-mode '(require 'init-octave))

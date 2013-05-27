@@ -8,6 +8,6 @@
 ;; (require 'semantic/bovine/gcc)
 
 (require 'ascope)
-(require 'xcscope)
+;;(require 'xcscope)
 
 (provide 'init-cc)
