@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: meta
+# key: #meta
+# --
+#+TITLE: ${1:`(file-name-base (buffer-file-name))`}
+#+HTML_HEAD: <meta name="slug" contents="$1" />
+#+HTML_HEAD: <meta name="date" contents="${2:`(format-time-string "%Y-%m-%d %H:%M")`}" />
+#+HTML_HEAD: <meta name="tags" contents="$3" />
+#+HTML_HEAD: <meta name="category" contents="$4" />
+$0
