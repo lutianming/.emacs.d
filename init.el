@@ -20,10 +20,7 @@
 (add-to-list 'load-path (expand-file-name
                          "inits" user-emacs-directory))
 
-;; Keep emacs Custom-settings in separate file
-(setq custom-file (expand-file-name
-                   "custom.el" user-emacs-directory))
-(load custom-file 'noerror)
+
 
 (require 'saveplace)
 (setq-default save-place t)
@@ -61,3 +58,8 @@
 (eval-after-load 'js2-mode '(require 'init-js))
 
 (require 'mode-mapping)
+
+;; Keep emacs Custom-settings in separate file
+(setq custom-file (expand-file-name
+                   "custom.el" user-emacs-directory))
+(load custom-file 'noerror)
