@@ -1,13 +1,17 @@
-(require 'package)
-(add-to-list 'package-archives
-             '("gnu" . "http://elpa.gnu.org/packages/") t)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-             '("tromey" . "http://tromey.com/elpa/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
+;;; init-packages.el --- packages config
+;;; Commentary:
+;;; Code:
+
+;;(require 'package)
+;; (add-to-list 'package-archives
+;;              '("gnu" . "http://elpa.gnu.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("marmalade" . "http://marmalade-repo.org/packages/") t)
+;; (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; (package-initialize)
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
 
 ;;----------el-get----------------------------------
 ;; (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -46,3 +50,4 @@
 ;; ;;----------end checking packages---------
 
 (provide 'init-packages)
+;;; init-packages.el ends here

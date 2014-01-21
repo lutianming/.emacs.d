@@ -1,6 +1,9 @@
 ;; ido makes competing buffers and finding files easier
 (require 'ido)
+(require 'flx-ido)
 (ido-mode t)
+(ido-everywhere 1)
+(flx-ido-mode 1)
 (ido-ubiquitous t)
 (setq ido-enable-prefix nil
       ido-enable-flex-matching t
@@ -8,10 +11,10 @@
       ido-create-new-buffer 'always
       ido-use-filename-at-point 'guess
       ido-use-virtual-buffers t
+      ido-use-faces nil
       ido-handle-duplicate-virtual-buffers 2
       ido-max-prospects 10)
 
-(setq ido-everywhere t)
 (setq
  ido-save-directory-list-file "~/.emacs.d/cache/ido.last"
 

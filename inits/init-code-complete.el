@@ -1,4 +1,6 @@
-;;--------------------autopair--------------------
+;;; init-code-complete.el --- config autocomplete and yasnippet
+;;; Commentary:
+;;; Code:
 (require 'autopair)
 (autopair-global-mode)
 (defun turn-off-autopair-mode () (autopair-mode -1))
@@ -14,9 +16,9 @@
 
 ;;---------yasnippet----------------
 (require 'yasnippet)
-(yas-global-mode)
-(setq yas/root-directory "~/.emacs.d/mysnippets")
-(yas/load-directory yas/root-directory)
-(global-set-key (kbd "<M-tab>") 'yas/expand)
+(setq yas-snippet-dirs  '("~/.emacs.d/mysnippets"))
+(yas-global-mode 1)
+(global-set-key (kbd "<M-tab>") 'yas-expand)
 
 (provide 'init-code-complete)
+;;; init-code-complete.el ends here

@@ -3,17 +3,19 @@
 (require 'ox-md)
 (require 'ox-latex)
 (require 'ox-ascii)
-;; (require 'ox-reveal)
-;; (setq org-reveal-root "file:///home/leo/Programmes/reveal.js")
+
+(require 'ox-reveal)
+(setq org-reveal-root "file:///home/leo/Codes/reveal.js")
+(setq org-reveal-hlevel 2)
 
 ;(require 'ox-rss)
-(setq org-agenda-files '("~/Dropbox/Documents/org"))
+(setq org-agenda-files '("~/Dropbox/org"))
 
 ;; org for GTD
-(setq org-directory "~/Dropbox/Documents/org/")
+(setq org-directory "~/Dropbox/org/")
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
 (defun open-note ()
-  "open or create a new note in ~/Dropbox/Documents/org/"
+  "open or create a new note in ~/Dropbox/org/"
   (interactive)
   (ido-find-file-in-dir org-directory))
 
@@ -33,17 +35,23 @@
          "* %?\nEntered on %U\n  %i\n  %a")))
 
 ;;org to latex
-(unless (boundp 'org-export-latex-classes)
-  (setq org-export-latex-classes nil))
-(add-to-list 'org-export-latex-classes
-             '("article"
-               "\\documentclass{article}"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-               ("\\paragraph{%s}" . "\\paragraph*{%s}")
-               ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
-(setq org-latex-to-pdf-process '("texi2dvi --pdf --clean --verbose --batch %f"))
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+(setq org-latex-minted-options
+      '(("frame" "lines")
+	("linenos" "")))
+
+;; (add-to-list 'org-export-latex-classes
+;;              '("article"
+;;                "\\documentclass{article}"
+;;                ("\\section{%s}" . "\\section*{%s}")
+;;                ("\\subsection{%s}" . "\\subsection*{%s}")
+;;                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+;;                ("\\paragraph{%s}" . "\\paragraph*{%s}")
+;;                ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -verbose -interaction nonstopmode -output-directory %o %f"))
 
 ;;html setting
 (setq org-html-inline-images t)
@@ -94,7 +102,7 @@ INFO is a plist used as a communication channel."
       (and (org-string-nw-p author)
 	   (concat
 	    (org-html-close-tag "meta"
-				(format " name=\"author\" contents=\"%s\""
+				(format " name=\"author\" content=\"%s\""
 					(funcall protect-string author))
 				info)
 	    "\n"))
@@ -192,7 +200,7 @@ holding export options."
          :publishing-directory "~/Workspace/blog.raw/content/"
          :recursive t
          :htmlized-source t
-;         :publishing-function org-html-publish-to-html
+	 ;;         :publishing-function org-html-publish-to-html
 	 :publishing-function org-blogentry-publish-to-html
          :headline-levels 4
          :html-extension "html"

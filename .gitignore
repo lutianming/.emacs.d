@@ -2,10 +2,11 @@ auto-save-list/
 backups/
 cache/
 el-get/
-elpa/
+elpa*/
 eshell/
 plugins/
 url/
+.cask/
 *.dat
 ede-projects.el
 places

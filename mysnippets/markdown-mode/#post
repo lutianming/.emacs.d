@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: post
+# key: #post
+# --
+---
+layout: ${1:post}
+title: ${2}
+description: ${3}
+category: ${4:articles}
+tags: [${5}]
+---
+
+$0

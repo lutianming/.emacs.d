@@ -1,8 +1,8 @@
 ;----------slime----------
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "/usr/bin/sbcl")
-(require 'slime)
-(require 'slime-repl)
+(require 'slime-autoloads)
+
 (slime-setup)
 (setq browse-url-browser-function 'w3m-browse-url)
 (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)

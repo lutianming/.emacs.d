@@ -13,7 +13,9 @@
  python-shell-completion-string-code
  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-;; jedi
+(require 'jedi)
+(setq jedi:key-goto-definition (kbd "C-c ["))
+(setq jedi:key-goto-definition-pop-marker (kbd "C-c ]"))
 (setq jedi:setup-keys t)
 (setq jedi:complete-on-dot 1)
 (add-hook 'python-mode-hook 'jedi:setup)

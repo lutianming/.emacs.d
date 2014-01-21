@@ -4,6 +4,8 @@
 (setq column-number-mode t);显示列号
 (setq line-number-mode t) ;显示列号
 (setq show-paren-mode t);显示括号匹配
+(setq show-paren-delay 0)
+(winner-mode 1)
 (setq mouse-avoidance-mode 'animate);光标靠近鼠标指针时，让鼠标指针自动让开
 (setq mouse-yank-at-point t);支持中键粘贴
 (setq transient-mark-mode t);高亮选中

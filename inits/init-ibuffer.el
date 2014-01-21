@@ -1,10 +1,12 @@
 ;;----------ibuffer----------
+(require 'ibuffer)
 (defun ibuffer-set-up-preferred-filters ()
   (ibuffer-vc-set-filter-groups-by-vc-root)
   (unless (eq ibuffer-sorting-mode 'filename/process)
     (ibuffer-do-sort-by-filename/process)))
 
 (add-hook 'ibuffer-hook 'ibuffer-set-up-preferred-filters)
+;;(add-to-list 'ibuffer-never-show-regexps "^\\*")
 
 (defun ibuffer-ido-find-file ()
   "Like `ido-find-file', but default to the directory of the buffer at point."

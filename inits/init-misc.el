@@ -10,10 +10,6 @@
 (require 'undo-tree)
 (undo-tree-mode)
 
-;;--------------------helm--------------------
-(require 'helm-config)
-(global-set-key (kbd "C-c h") 'helm-mini)
-
 (require 'projectile)
 (projectile-global-mode)
 
@@ -29,5 +25,13 @@
 ;(setq gnus-init-file '~/.emacs.d/gnus.el)
 
 (require 'sr-speedbar)
+
+(require 'smex)
+(smex-initialize)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
 (provide 'init-misc)

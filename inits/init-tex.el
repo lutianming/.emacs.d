@@ -1,7 +1,4 @@
-;;--------------------Latex--------------------
-(require 'tex-site)
-
-(setq Tex-global-PDF-mode t)
+(setq Tex-PDF-mode t)
 (setq TeX-auto-save t)
 (setq TeX-auto-untabify t)
 (setq TeX-show-compilation t)
@@ -9,14 +6,16 @@
 (setq reftex-plug-into-AUCTeX t)
 (setq TeX-engine 'xetex)
 (setq-default TeX-master nil)
-(setq TeX-view-program-list
-      '(("mupdf" "mupdf %o")
-        ("evince" "evince %o")))
-(setq TeX-view-program-selection '((output-pdf "mupdf")))
 
+;; (setq TeX-view-program-list
+;;       '(("mupdf" "mupdf %o")))
+;; (setq TeX-view-program-selection '((output-pdf "mupdf")))
+(setq TeX-output-view-style (quote (("^pdf$" "." "mupdf %o") ("^html?$" "." "iceweasel %o"))))
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
 (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
 (provide 'init-tex)
