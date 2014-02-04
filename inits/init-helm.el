@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 (require 'helm-config)
-(global-set-key (kbd "C-c h") 'helm-mini)
 (global-set-key (kbd "C-x f") 'helm-for-files)
 
 (helm-mode 1)

@@ -12,7 +12,7 @@
 (setq delete-selection-mode t)
 (setq x-select-enable-clipboard t);支持emacs和外部程序的粘贴
 (setq frame-title-format "leo.emacs@%b")
-(setq user-full-name "Lu Tianming")
+(setq user-full-name "LU Tianming")
 (setq user-mail-address "lutianming1005@gmail.com")
 (setq default-fill-column 80);默认显示 80列就换行
 

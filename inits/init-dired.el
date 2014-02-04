@@ -1,4 +1,6 @@
-;;----------dired----------------------
+;;; init-dired.el --- config dired
+;;; Commentary:
+;;; Code:
 (require 'dired+)
 (global-set-key (kbd "C-x d") 'dired)
 (global-set-key (kbd "C-x C-d") 'diredp-dired-files-other-window)
@@ -10,3 +12,4 @@
 (dired-details-install)
 
 (provide 'init-dired)
+;;; init-dired.el ends here

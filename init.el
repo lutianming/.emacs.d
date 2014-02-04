@@ -19,7 +19,7 @@
 
 (setq debug-on-error t)
 
-;; Set up load path
+;; Set up load
 (add-to-list 'load-path user-emacs-directory)
 (add-to-list 'load-path (expand-file-name
                          "inits" user-emacs-directory))
@@ -33,6 +33,7 @@
 (require 'init-packages)
 
 (require 'init-setup)
+(require 'init-spell)
 (require 'init-code-complete)
 (require 'init-pair)
 
