@@ -1,9 +1,14 @@
+;;; init-window.el --- config window layout
+;;; Commentary:
+;;; Code:
+
 (windmove-default-keybindings)
 
 (winner-mode 1)
 (global-set-key (kbd "C-x <left>") 'winner-undo)
 (global-set-key (kbd "C-x <right>") 'winner-redo)
 
+(window-numbering-mode 1)
 (defun toggle-window-split ()
   (interactive)
   (if (= (count-windows) 2)
@@ -30,4 +35,12 @@
           (if this-win-2nd (other-window 1))))))
 (global-set-key (kbd "C-x t") 'toggle-window-split)
 
+;; (require 'ecb)
+;; (setq ecb-layout-name "left6")
+;; (setq ecb-tip-of-the-day nil)
+;;(require 'sr-speedbar)
+;;(semantic-mode)
+;;(sr-speedbar-open)
+
 (provide 'init-window)
+;;; init-window.el ends here

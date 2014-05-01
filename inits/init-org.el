@@ -7,9 +7,13 @@
 (require 'ox-md)
 (require 'ox-latex)
 (require 'ox-ascii)
+;; (require 'ox-rss)
 
-(require 'ox-reveal)
-(setq org-reveal-root "file:///home/leo/Codes/reveal.js")
+;;(require 'ox-reveal)
+(load "~/Codes/org-reveal/ox-reveal.el")
+
+;;(setq org-reveal-root "file:///home/leo/Codes/reveal.js")
+(setq org-reveal-root "http://lutianming.github.io/camera/reveal")
 (setq org-reveal-hlevel 2)
 
 ;(require 'ox-rss)
@@ -63,35 +67,16 @@
 ;;org for blog
 (setq org-publish-project-alist
       '(
-	("pelican"
-         ;; Path to your org files.
-         :base-directory "~/Workspace/blog.raw/org"
-         :base-extension "org"
-
-         ;; Path to your blog project.
-         :publishing-directory "~/Workspace/blog.raw/content/"
-         :recursive t
-         :htmlized-source t
-	 :publishing-function org-html-publish-to-html
-         :headline-levels 4
-         :html-extension "html"
-	 :html-head-include-default-style nil
-	 :html-head-include-scripts nil
-	 :html-postamble nil
-	 :section-numbers nil
-	 :auto-sitemap nil
-;;         :body-only t ;; Only export section between <body> </body>
-         :with-toc nil
-         )
-        ("org-static"
+        ("blog-static"
          :base-directory "~/Workspace/org/static"
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
-         :publishing-directory "~/Workspace/org/out"
+         :publishing-directory "~/Workspace/org/out/static"
          :recursive t
          :publishing-function org-publish-attachment)
-	("org-blog"
+
+	("blog-post"
          ;; Path to your org files.
-         :base-directory "~/Workspace/org/"
+         :base-directory "~/Workspace/org/posts"
          :base-extension "org"
 
          ;; Path to your blog project.
@@ -99,24 +84,74 @@
          :recursive t
          :htmlized-source t
          :publishing-function org-html-publish-to-html
-	 :html-link-home "index.html"
-	 :html-link-up "sitemap.html"
+	 ;; :html-link-home "index.html"
          :headline-levels 4
          :html-extension "html"
+	 :html-doctype "html5"
+	 :section-number nil
 	 :auto-preamble t
 ;;         :body-only t ;; Only export section between <body> </body>
 	 :with-toc nil
 	 :auto-sitemap t
-	 :sitemap-file "sitemap.org"
-	 :sitemap-title "Sitemap"
+	 :sitemap-sort-files "anti-chronologically"
+	 :sitemap-filename "posts.org"
+	 :sitemap-title ""
 	 :sitemap-file-entry-format "%d %t"
-	 :makeindex t
-	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"worg.css\"/>"
-	 :infojs-opt "path:org-info.js"
-	 :infojs-opt "toc:nil view:slide"
+	 :makeindex nil
+	 :html-preamble org-mode-blog-preamble
+	 :html-postamble org-mode-blog-postamble
+	 :html-head "<link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.4.2/pure-min.css\"/>\n<link rel=\"stylesheet\" href=\"static/css/style.css\"/>"
+	 ;; :infojs-opt "path:static/js/org-info.js"
+	 ;; :infojs-opt "toc:nil view:slide"
+	 :exclude  "posts.org"
          )
-        ("org" :components ("pelican" "org-blog" "org-static"))
+
+	("blog-page"
+         ;; Path to your org files.
+         :base-directory "~/Workspace/org/"
+         :base-extension "org"
+
+         ;; Path to your blog project.
+         :publishing-directory "~/Workspace/org/out"
+         :htmlized-source t
+         :publishing-function org-html-publish-to-html
+	 ;; :html-link-home "index.html"
+         :headline-levels 4
+         :html-extension "html"
+	 :html-doctype "html5"
+	 ;; :auto-preamble t
+	 ;;         :body-only t ;; Only export section between <body> </body>
+	 :html-preamble org-mode-blog-preamble
+	 :with-toc nil
+	 :auto-sitemap nil
+	 :makeindex nil
+	 :html-head "<link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.4.2/pure-min.css\"/>\n<link rel=\"stylesheet\" href=\"static/css/style.css\"/>"
+	 ;; :infojs-opt "path:static/js/org-info.js"
+	 ;; :infojs-opt "toc:nil view:slide"
+	 ;; :exclude  "index.org"
+         )
+	;; ("org-rss"
+	;;  :base-directory "~/Workspace/org/"
+	;;  :base-extension "org"
+	;;  :publishing-directory "~/Workspace/org/out"
+	;;  :publishing-function org-rss-publish-to-rss
+	;;  :with-toc nil
+	;;  :include ("index.org"))
+        ("blog" :components ("blog-static" "blog-post" "blog-page"))
         ))
+
+
+
+(defun org-mode-blog-preamble (options)
+  "The function that creates the preamble menu for the blog.
+OPTIONS contains the property list from the org-mode export."
+  (let ((base-directory "~/Workspace/org"))
+    (org-babel-with-temp-filebuffer (expand-file-name "html/preamble.html" base-directory) (buffer-string))))
+
+(defun org-mode-blog-postamble (options)
+  (let ((base-directory "~/Workspace/org"))
+    (org-babel-with-temp-filebuffer (expand-file-name "html/postamble.html" base-directory) (buffer-string))))
+
 
 (setq org-src-fontify-natively t)
 (setq org-list-allow-alphabetical t)

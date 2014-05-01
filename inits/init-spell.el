@@ -11,7 +11,7 @@
 ;;(setq ispell-list-command "list") ;;for aspell, seems this variable is removed
 (setq flyspell-issue-message-flag nil)
 
-(add-hook 'org-mode-hook (lambda () (flyspell-mode)))
+;;(add-hook 'org-mode-hook (lambda () (flyspell-mode)))
 ;; (add-hook 'prog-mode-hook (lambda () (flyspell-prog-mode)))
 (provide 'init-spell)
 ;;; init-spell.el ends here
