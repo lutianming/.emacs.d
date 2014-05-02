@@ -105,11 +105,12 @@
          :headline-levels 4
          :html-extension "html"
 	 :html-doctype "html5"
-	 :section-number nil
+	 :section-numbers nil
 	 :auto-preamble t
 ;;         :body-only t ;; Only export section between <body> </body>
 	 :with-toc nil
 	 :auto-sitemap t
+	 :sitemap-function org-publish-blog-rss-sitemap
 	 :sitemap-sort-files "anti-chronologically"
 	 :sitemap-filename "posts.org"
 	 :sitemap-title ""
@@ -134,6 +135,7 @@
          :publishing-function org-html-publish-to-html
 	 ;; :html-link-home "index.html"
          :headline-levels 4
+	 :section-numbers nil
          :html-extension "html"
 	 :html-doctype "html5"
 	 ;; :auto-preamble t
@@ -153,17 +155,106 @@
 	 :base-extension "org"
 	 :publishing-directory "~/Workspace/lutianming.github.io"
 	 :publishing-function org-rss-publish-to-rss
-	 :html-link-home "lutianming.github.io"
+	 :html-link-home "https://lutianming.github.io"
 	 :html-link-use-abs-url t
 	 :with-toc nil
 	 :rss-image-url nil
 	 :rss-extension "xml"
 	 :exclude ".*"
+	 :with-toc nil
 	 :include ("posts.org"))
         ("blog" :components ("blog-static" "blog-post" "blog-page" "blog-rss"))
         ))
 
+(defun org-publish-blog-rss-sitemap (project &optional sitemap-filename)
+  "Create a sitemap of pages in set defined by PROJECT.
+Optionally set the filename of the sitemap with SITEMAP-FILENAME.
+Default for SITEMAP-FILENAME is 'sitemap.org'."
+  (let* ((project-plist (cdr project))
+	 (dir (file-name-as-directory
+	       (plist-get project-plist :base-directory)))
+	 (localdir (file-name-directory dir))
+	 (indent-str (make-string 2 ?\ ))
+	 (exclude-regexp (plist-get project-plist :exclude))
+	 (files (nreverse
+		 (org-publish-get-base-files project exclude-regexp)))
+	 (sitemap-filename (concat dir (or sitemap-filename "sitemap.org")))
+	 (sitemap-title (or (plist-get project-plist :sitemap-title)
+			    (concat "Sitemap for project " (car project))))
+	 (sitemap-style (or (plist-get project-plist :sitemap-style)
+			    'tree))
+	 (sitemap-sans-extension
+	  (plist-get project-plist :sitemap-sans-extension))
+	 (visiting (find-buffer-visiting sitemap-filename))
+	 (ifn (file-name-nondirectory sitemap-filename))
+	 file sitemap-buffer)
+    (with-current-buffer
+	(let ((org-inhibit-startup t))
+	  (setq sitemap-buffer
+		(or visiting (find-file sitemap-filename))))
+      (erase-buffer)
+      (insert (concat "#+TITLE: " sitemap-title "\n\n"))
+      (while (setq file (pop files))
+	(let ((fn (file-name-nondirectory file))
+	      (link (file-relative-name file dir))
+	      (oldlocal localdir))
+	  (when sitemap-sans-extension
+	    (setq link (file-name-sans-extension link)))
+	  ;; sitemap shouldn't list itself
+	  (unless (equal (file-truename sitemap-filename)
+			 (file-truename file))
+	    (if (eq sitemap-style 'list)
+		(message "Generating list-style sitemap for %s" sitemap-title)
+	      (message "Generating tree-style sitemap for %s" sitemap-title)
+	      (setq localdir (concat (file-name-as-directory dir)
+				     (file-name-directory link)))
+	      (unless (string= localdir oldlocal)
+		(if (string= localdir dir)
+		    (setq indent-str (make-string 2 ?\ ))
+		  (let ((subdirs
+			 (split-string
+			  (directory-file-name
+			   (file-name-directory
+			    (file-relative-name localdir dir))) "/"))
+			(subdir "")
+			(old-subdirs (split-string
+				      (file-relative-name oldlocal dir) "/")))
+		    (setq indent-str (make-string 2 ?\ ))
+		    (while (string= (car old-subdirs) (car subdirs))
+		      (setq indent-str (concat indent-str (make-string 2 ?\ )))
+		      (pop old-subdirs)
+		      (pop subdirs))
+		    (dolist (d subdirs)
+		      (setq subdir (concat subdir d "/"))
+		      (insert (concat indent-str " + " d "\n"))
+		      (setq indent-str (make-string
+					(+ (length indent-str) 2) ?\ )))))))
+	    ;; This is common to 'flat and 'tree
+	    (let ((entry
+		   (org-publish-format-file-entry
+		    org-publish-sitemap-file-entry-format file project-plist))
+		  (regexp "\\(.*\\)\\[\\([^][]+\\)\\]\\(.*\\)"))
+	      (cond ((string-match-p regexp entry)
+		     (string-match regexp entry)
+		     (insert (concat "* " (match-string 1 entry)
+				     "[[file:" link "]["
+				     (match-string 2 entry)
+				     "]]" (match-string 3 entry) "\n")))
+		    (t
+		     (insert (concat "* [[file:" link "]["
+				     entry
+				     "]]\n"))))
+	      (insert (format ":PROPERTIES:
+:PUBDATE: %s
+:RSS_PERMALINK: %s
+:END:
+\n"
 
+			      (format-time-string org-publish-sitemap-date-format
+						  (org-publish-find-date file))
+			      (concat (file-name-sans-extension link) ".html")))))))
+      (save-buffer))
+    (or visiting (kill-buffer sitemap-buffer))))
 
 (defun blog-preamble (options)
   "The function that creates the preamble menu for the blog.
