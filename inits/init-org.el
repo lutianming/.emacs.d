@@ -34,7 +34,7 @@
 
 ;(require 'ox-rss)
 (setq org-agenda-files '("~/Dropbox/org"))
-
+(setq org-export-allow-bind-keywords t)
 ;; org for GTD
 (setq org-directory "~/Dropbox/org/")
 (add-hook 'org-mode-hook (lambda () (setq truncate-lines nil)))
@@ -117,7 +117,7 @@
 	 :sitemap-file-entry-format "%d %t"
 	 :makeindex nil
 	 :html-preamble blog-preamble
-	 :html-postamble post-postamble
+	 :html-postamble blog-postamble
 	 :html-head "<link rel=\"stylesheet\" href=\"static/css/pure-min.css\"/>\n<link rel=\"stylesheet\" href=\"static/css/style.css\"/>"
 	 ;; :infojs-opt "path:static/js/org-info.js"
 	 ;; :infojs-opt "toc:nil view:slide"
@@ -141,7 +141,7 @@
 	 ;; :auto-preamble t
 	 ;;         :body-only t ;; Only export section between <body> </body>
 	 :html-preamble blog-preamble
-	 :html-postamble page-postamble
+	 :html-postamble blog-postamble
 	 :with-toc nil
 	 :auto-sitemap nil
 	 :makeindex nil
@@ -262,13 +262,21 @@ OPTIONS contains the property list from the org-mode export."
   (let ((base-directory "~/Workspace/org"))
     (org-babel-with-temp-filebuffer (expand-file-name "html/preamble.html" base-directory) (buffer-string))))
 
-(defun post-postamble (options)
-  (let ((base-directory "~/Workspace/org"))
-    (org-babel-with-temp-filebuffer (expand-file-name "html/post_postamble.html" base-directory) (buffer-string))))
-
-(defun page-postamble (options)
-  (let ((base-directory "~/Workspace/org"))
-    (org-babel-with-temp-filebuffer (expand-file-name "html/page_postamble.html" base-directory) (buffer-string))))
+(defun blog-postamble (options)
+  (let ((base-directory "~/Workspace/org")
+	(type
+	 (or
+	  (org-element-map (plist-get options :parse-tree) 'keyword
+	    (lambda (k)
+	      (if (equal (org-element-property :key k) "TYPE")
+		  (org-element-property :value k))
+	      )
+	    nil t)
+	  ;;default to be a post
+	  "post")))
+    (cond ((equal type "post") (org-babel-with-temp-filebuffer (expand-file-name "html/post_postamble.html" base-directory) (buffer-string)))
+	  (t (org-babel-with-temp-filebuffer (expand-file-name "html/page_postamble.html" base-directory) (buffer-string))))
+    ))
 
 (setq org-src-fontify-natively t)
 (setq org-list-allow-alphabetical t)
