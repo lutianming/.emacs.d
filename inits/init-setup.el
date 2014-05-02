@@ -23,6 +23,8 @@
 (setq shell-cd-regexp nil) ;保持默认目录不改变
 (setq shell-push-regexp nil)
 (setq shell-popd-regexp nil)
+
+(setq system-time-locale "C") ;timestamp english
 ;;页面平滑滚动
 (setq scroll-margin 5
       scroll-conservatively 10000)
