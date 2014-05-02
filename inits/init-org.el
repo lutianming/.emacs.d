@@ -7,7 +7,23 @@
 (require 'ox-md)
 (require 'ox-latex)
 (require 'ox-ascii)
-;; (require 'ox-rss)
+(require 'ox-rss)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)
+   (ditaa . t)
+   (dot . t)
+   (emacs-lisp . t)
+   (gnuplot . t)
+   (haskell . nil)
+   (ocaml . nil)
+   (python . t)
+   (ruby . nil)
+   (screen . nil)
+   (sh . t)
+   (sql . nil)
+   (sqlite . t)))
 
 ;;(require 'ox-reveal)
 (load "~/Codes/org-reveal/ox-reveal.el")
@@ -65,12 +81,13 @@
 (setq org-html-inline-images t)
 
 ;;org for blog
+
 (setq org-publish-project-alist
       '(
         ("blog-static"
          :base-directory "~/Workspace/org/static"
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|php"
-         :publishing-directory "~/Workspace/org/out/static"
+         :publishing-directory "~/Workspace/lutianming.github.io/static"
          :recursive t
          :publishing-function org-publish-attachment)
 
@@ -80,7 +97,7 @@
          :base-extension "org"
 
          ;; Path to your blog project.
-         :publishing-directory "~/Workspace/org/out"
+         :publishing-directory "~/Workspace/lutianming.github.io"
          :recursive t
          :htmlized-source t
          :publishing-function org-html-publish-to-html
@@ -98,9 +115,9 @@
 	 :sitemap-title ""
 	 :sitemap-file-entry-format "%d %t"
 	 :makeindex nil
-	 :html-preamble org-mode-blog-preamble
-	 :html-postamble org-mode-blog-postamble
-	 :html-head "<link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.4.2/pure-min.css\"/>\n<link rel=\"stylesheet\" href=\"static/css/style.css\"/>"
+	 :html-preamble blog-preamble
+	 :html-postamble post-postamble
+	 :html-head "<link rel=\"stylesheet\" href=\"static/css/pure-min.css\"/>\n<link rel=\"stylesheet\" href=\"static/css/style.css\"/>"
 	 ;; :infojs-opt "path:static/js/org-info.js"
 	 ;; :infojs-opt "toc:nil view:slide"
 	 :exclude  "posts.org"
@@ -112,7 +129,7 @@
          :base-extension "org"
 
          ;; Path to your blog project.
-         :publishing-directory "~/Workspace/org/out"
+         :publishing-directory "~/Workspace/lutianming.github.io"
          :htmlized-source t
          :publishing-function org-html-publish-to-html
 	 ;; :html-link-home "index.html"
@@ -121,37 +138,46 @@
 	 :html-doctype "html5"
 	 ;; :auto-preamble t
 	 ;;         :body-only t ;; Only export section between <body> </body>
-	 :html-preamble org-mode-blog-preamble
+	 :html-preamble blog-preamble
+	 :html-postamble page-postamble
 	 :with-toc nil
 	 :auto-sitemap nil
 	 :makeindex nil
-	 :html-head "<link rel=\"stylesheet\" href=\"http://yui.yahooapis.com/pure/0.4.2/pure-min.css\"/>\n<link rel=\"stylesheet\" href=\"static/css/style.css\"/>"
+	 :html-head "<link rel=\"stylesheet\" href=\"static/css/pure-min.css\"/>\n<link rel=\"stylesheet\" href=\"static/css/style.css\"/>"
 	 ;; :infojs-opt "path:static/js/org-info.js"
 	 ;; :infojs-opt "toc:nil view:slide"
 	 ;; :exclude  "index.org"
          )
-	;; ("org-rss"
-	;;  :base-directory "~/Workspace/org/"
-	;;  :base-extension "org"
-	;;  :publishing-directory "~/Workspace/org/out"
-	;;  :publishing-function org-rss-publish-to-rss
-	;;  :with-toc nil
-	;;  :include ("index.org"))
-        ("blog" :components ("blog-static" "blog-post" "blog-page"))
+	("blog-rss"
+	 :base-directory "~/Workspace/org/posts"
+	 :base-extension "org"
+	 :publishing-directory "~/Workspace/lutianming.github.io"
+	 :publishing-function org-rss-publish-to-rss
+	 :html-link-home "lutianming.github.io"
+	 :html-link-use-abs-url t
+	 :with-toc nil
+	 :rss-image-url nil
+	 :rss-extension "xml"
+	 :exclude ".*"
+	 :include ("posts.org"))
+        ("blog" :components ("blog-static" "blog-post" "blog-page" "blog-rss"))
         ))
 
 
 
-(defun org-mode-blog-preamble (options)
+(defun blog-preamble (options)
   "The function that creates the preamble menu for the blog.
 OPTIONS contains the property list from the org-mode export."
   (let ((base-directory "~/Workspace/org"))
     (org-babel-with-temp-filebuffer (expand-file-name "html/preamble.html" base-directory) (buffer-string))))
 
-(defun org-mode-blog-postamble (options)
+(defun post-postamble (options)
   (let ((base-directory "~/Workspace/org"))
-    (org-babel-with-temp-filebuffer (expand-file-name "html/postamble.html" base-directory) (buffer-string))))
+    (org-babel-with-temp-filebuffer (expand-file-name "html/post_postamble.html" base-directory) (buffer-string))))
 
+(defun page-postamble (options)
+  (let ((base-directory "~/Workspace/org"))
+    (org-babel-with-temp-filebuffer (expand-file-name "html/page_postamble.html" base-directory) (buffer-string))))
 
 (setq org-src-fontify-natively t)
 (setq org-list-allow-alphabetical t)

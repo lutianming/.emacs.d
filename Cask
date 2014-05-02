@@ -1,6 +1,7 @@
 (source melpa)
 (source marmalade)
 (source gnu)
+(source org)
 
 (depends-on "ac-c-headers")
 (depends-on "ac-slime")
