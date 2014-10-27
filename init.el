@@ -32,7 +32,6 @@
 
 (require 'init-packages)
 
-(require 'init-setup)
 (require 'init-spell)
 (require 'init-code-complete)
 (require 'init-pair)
@@ -53,6 +52,7 @@
 (require 'buffer-defuns)
 (require 'editing-defuns)
 (require 'init-editing)
+(require 'init-term)
 
 ;;settings for different languages
 (require 'init-scala)
@@ -76,6 +76,7 @@
 ;; (eval-after-load 'js3-mode '(require 'init-js))
 
 ;; Keep emacs Custom-settings in separate file
+(require 'init-setup)
 (setq custom-file (expand-file-name
                    "custom.el" user-emacs-directory))
 (load custom-file 'noerror)

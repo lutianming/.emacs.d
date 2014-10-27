@@ -34,4 +34,9 @@
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
+(require 'fill-column-indicator)
+(setq fci-rule-column 80)
+(setq fci-rule-width 5)
+(fci-mode)
+
 (provide 'init-misc)

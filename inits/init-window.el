@@ -35,6 +35,8 @@
           (if this-win-2nd (other-window 1))))))
 (global-set-key (kbd "C-x t") 'toggle-window-split)
 
+(require 'popwin)
+(popwin-mode 1)
 ;; (require 'ecb)
 ;; (setq ecb-layout-name "left6")
 ;; (setq ecb-tip-of-the-day nil)

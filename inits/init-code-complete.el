@@ -14,9 +14,12 @@
 (define-key ac-complete-mode-map "\r" nil)
 (define-key ac-complete-mode-map [return] nil)
 
+;; (global-company-mode)
+;; (global-set-key (kbd "C-,") 'company-complete)
+
 ;;---------yasnippet----------------
 (require 'yasnippet)
-(setq yas-snippet-dirs  '("~/.emacs.d/mysnippets"))
+;; (setq yas-snippet-dirs  '("~/.emacs.d/mysnippets"))
 (yas-global-mode 1)
 (global-set-key (kbd "<M-tab>") 'yas-expand)
 

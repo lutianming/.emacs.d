@@ -1,6 +1,6 @@
-(source melpa)
-(source marmalade)
 (source gnu)
+(source marmalade)
+(source melpa)
 (source org)
 
 (depends-on "ac-c-headers")
@@ -64,6 +64,7 @@
 (depends-on "pcsv")
 (depends-on "pkg-info")
 (depends-on "popup")
+(depends-on "popwin")
 (depends-on "powerline")
 (depends-on "projectile")
 (depends-on "python-environment")
