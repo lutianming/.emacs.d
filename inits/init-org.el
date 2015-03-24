@@ -35,6 +35,7 @@
 ;;(setq org-reveal-root "file:///home/leo/Codes/reveal.js")
 (setq org-reveal-root "http://lutianming.github.io/camera/reveal")
 (setq org-reveal-hlevel 2)
+(setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 
 ;(require 'ox-rss)
 (setq org-agenda-files '("~/Dropbox/org"))

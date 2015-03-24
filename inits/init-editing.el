@@ -1,6 +1,7 @@
 ;;; init-editing.el --- editing related config
 ;;; Commentary:
 ;;; Code:
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (global-set-key (kbd "<f5>") 'find-file) ; Open file or dir
 (global-set-key (kbd "<f6>") 'kill-this-buffer) ; Close file
@@ -67,7 +68,7 @@
 (require 'multiple-cursors)
 
 ;;it seems it will automatively become editable
-;;(define-key region-bindings-mode-map "e" 'mc/edit-lines)
+(define-key region-bindings-mode-map "e" 'mc/edit-lines)
 (define-key region-bindings-mode-map "a" 'mc/mark-all-like-this)
 (define-key region-bindings-mode-map "n" 'mc/mark-next-like-this)
 (define-key region-bindings-mode-map "p" 'mc/mark-previous-like-this)

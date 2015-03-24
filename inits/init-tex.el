@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 ;(require 'preview-latex)
-(require 'auctex-autoloads)
+(require 'tex)
 (require 'preview)
 
 ;(TeX-PDF-mode t)

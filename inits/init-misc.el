@@ -10,8 +10,6 @@
 (require 'undo-tree)
 (undo-tree-mode)
 
-(require 'projectile)
-(projectile-global-mode)
 
 ;----------w3m----------
 ;(require 'w3m-load)
