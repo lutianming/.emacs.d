@@ -28,6 +28,8 @@
 (setq jedi:complete-on-dot 1)
 (add-hook 'python-mode-hook 'jedi:setup)
 
+(add-to-list 'company-backends 'company-jedi)
+
 (require 'virtualenv)
 
 ;; (require 'ein)

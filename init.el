@@ -38,7 +38,7 @@
 (require 'init-dired)
 (require 'init-window)
 (require 'init-misc)
-(require 'init-magit)
+(require 'init-git)
 
 (require 'init-ibuffer)
 ;;ido or helm, make the choice
@@ -63,6 +63,7 @@
 (require 'init-lisp)
 (require 'init-tex)
 (require 'init-js)
+(require 'init-rust)
 ;;(eval-after-load 'org '(require 'init-org))
 ;;(eval-after-load 'nxml-mode '(require 'init-xml))
 ;;(eval-after-load 'cc-mode'(require 'init-cc))
@@ -76,6 +77,7 @@
 
 ;; Keep emacs Custom-settings in separate file
 (require 'init-setup)
+(require 'init-hydra)
 (setq custom-file (expand-file-name
                    "custom.el" user-emacs-directory))
 (load custom-file 'noerror)

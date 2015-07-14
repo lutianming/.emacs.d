@@ -7,7 +7,8 @@
 ;; (require 'semantic/ia)
 ;; (require 'semantic/bovine/gcc)
 
-(require 'ascope)
+;; (require 'ascope)
 ;;(require 'xcscope)
 
+(setq c-basic-offset 4)
 (provide 'init-cc)

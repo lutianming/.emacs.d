@@ -9,9 +9,11 @@
 
 (require 'flyspell)
 ;;(setq ispell-list-command "list") ;;for aspell, seems this variable is removed
+(add-hook 'text-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'markdown-mode-hook 'flyspell-mode)
+
 (setq flyspell-issue-message-flag nil)
 
-;;(add-hook 'org-mode-hook (lambda () (flyspell-mode)))
-;; (add-hook 'prog-mode-hook (lambda () (flyspell-prog-mode)))
 (provide 'init-spell)
 ;;; init-spell.el ends here

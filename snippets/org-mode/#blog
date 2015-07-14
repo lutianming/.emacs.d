@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: new-blog
+# key: #blog
+# --
+#+STARTUP: showall indent
+#+STARTUP: hidestars
+#+BEGIN_HTML
+<!--#Title: ${1:post}-->
+<!--#Date: $2-->
+<!--#Tags: $3-->
+<!--#Slug: $4-->
+<!--#Author: ${5:Tianming}-->
+#+END_HTML
+$0

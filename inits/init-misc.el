@@ -12,8 +12,8 @@
 
 
 ;----------w3m----------
-;(require 'w3m-load)
-;(require 'mime-w3m)
+(require 'w3m)
+(setq browse-url-browser-function 'w3m-browse-url)
 
 ;; (require 'diminish)
 ;; (eval-after-load "yasnippet" '(diminish 'yas-minor-mode "Y"))
@@ -31,10 +31,5 @@
 
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-
-(require 'fill-column-indicator)
-(setq fci-rule-column 80)
-(setq fci-rule-width 5)
-(fci-mode)
 
 (provide 'init-misc)

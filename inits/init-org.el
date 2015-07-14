@@ -28,7 +28,7 @@
 
 ;;(require 'ox-reveal)
 (load "~/Codes/org-reveal/ox-reveal.el")
-(load "~/Workspace/ox-blog/ox-blog.el")
+;; (load "~/Workspace/ox-blog/ox-blog.el")
 
 
 

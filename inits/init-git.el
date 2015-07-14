@@ -1,4 +1,5 @@
 (require 'magit)
+
 (defadvice magit-status (around magit-fullscreen activate)
   (window-configuration-to-register :magit-fullscreen)
   ad-do-it
@@ -12,4 +13,7 @@
 
 (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
 
-(provide 'init-magit)
+(require 'git-gutter)
+(global-git-gutter-mode 1)
+
+(provide 'init-git)

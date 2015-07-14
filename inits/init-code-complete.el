@@ -1,19 +1,20 @@
 ;;; init-code-complete.el --- config autocomplete and yasnippet
 ;;; Commentary:
 ;;; Code:
-(require 'autopair)
-(autopair-global-mode)
-(defun turn-off-autopair-mode () (autopair-mode -1))
-(add-hook 'lisp-mode-hook 'turn-off-autopair-mode)
-(add-hook 'emacs-lisp-mode-hook 'turn-off-autopair-mode)
 
 ;;----------auto-complete-----------------------------------
-(require 'auto-complete-config)
-(ac-config-default)
-(setq ac-auto-start t)
-(define-key ac-complete-mode-map "\r" nil)
-(define-key ac-complete-mode-map [return] nil)
+;; (require 'auto-complete-config)
+;; (ac-config-default)
+;; (setq ac-auto-start t)
+;; (define-key ac-complete-mode-map "\r" nil)
+;; (define-key ac-complete-mode-map [return] nil)
+;; (add-hook 'rust-mode-hook 'auto-complete-mode)
 
+(electric-pair-mode 1)
+
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(setq company-dabbrev-downcase nil)
 ;; (global-company-mode)
 ;; (global-set-key (kbd "C-,") 'company-complete)
 
