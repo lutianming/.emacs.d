@@ -27,14 +27,14 @@
    (sqlite . t)))
 
 ;;(require 'ox-reveal)
-(load "~/Codes/org-reveal/ox-reveal.el")
+;;(load "~/Codes/org-reveal/ox-reveal.el")
 ;; (load "~/Workspace/ox-blog/ox-blog.el")
 
 
 
 ;;(setq org-reveal-root "file:///home/leo/Codes/reveal.js")
-(setq org-reveal-root "http://lutianming.github.io/camera/reveal")
-(setq org-reveal-hlevel 2)
+;; (setq org-reveal-root "http://lutianming.github.io/camera/reveal")
+;; (setq org-reveal-hlevel 2)
 (setq org-ditaa-jar-path "/usr/share/ditaa/ditaa.jar")
 
 ;(require 'ox-rss)

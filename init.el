@@ -31,6 +31,8 @@
 
 (require 'init-packages)
 
+(benchmark-init/activate)
+
 (require 'init-spell)
 (require 'init-code-complete)
 (require 'init-pair)
@@ -60,7 +62,7 @@
 (require 'init-python)
 (require 'init-markdown)
 (require 'init-octave)
-(require 'init-lisp)
+;;(require 'init-lisp)
 (require 'init-tex)
 (require 'init-js)
 (require 'init-rust)

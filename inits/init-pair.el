@@ -7,9 +7,6 @@
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
-
-;; (require 'autopair)
-;; (autopair-global-mode)
 (require 'smartparens-config)
 
 (provide 'init-pair)

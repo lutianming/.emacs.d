@@ -25,8 +25,7 @@
 ;(setq web-mode-markup-indent-offset 4)
 (defun my-web-mode-hook ()
   "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 4)
-  (autopair-mode 0))
+  (setq web-mode-markup-indent-offset 4))
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
 (provide 'init-web)
