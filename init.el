@@ -31,8 +31,6 @@
 
 (require 'init-packages)
 
-(benchmark-init/activate)
-
 (require 'init-spell)
 (require 'init-code-complete)
 (require 'init-pair)

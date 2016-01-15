@@ -8,8 +8,8 @@
 (setq dired-recursive-deletes 'top)
 (diredp-toggle-find-file-reuse-dir 1)
 
-(require 'dired-details)
-(dired-details-install)
+;;(require 'dired-details)
+;;(dired-details-install)
 
 (provide 'init-dired)
 ;;; init-dired.el ends here
