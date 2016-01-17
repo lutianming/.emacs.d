@@ -18,7 +18,7 @@
   (server-start))
 
 (setq debug-on-error t)
-
+;;(setq debug-on-quit t)
 ;; Set up load
 (add-to-list 'load-path (expand-file-name
                          "inits" user-emacs-directory))

@@ -15,18 +15,13 @@
  python-shell-completion-string-code
  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-;; (require 'elpy)
-;; (elpy-enable)
-;; (elpy-clean-modeline)
-;; (elpy-use-ipython)
-;; (setq elpy-rpc-backend "jedi")
-
-(require 'jedi)
-(setq jedi:key-goto-definition (kbd "C-c ["))
-(setq jedi:key-goto-definition-pop-marker (kbd "C-c ]"))
-(setq jedi:setup-keys t)
-(setq jedi:complete-on-dot 1)
-(add-hook 'python-mode-hook 'jedi:setup)
+;;(require 'jedi:setup)
+;;(setq jedi:key-goto-definition (kbd "C-c ["))
+;;(setq jedi:key-goto-definition-pop-marker (kbd "C-c ]"))
+;;(setq jedi:setup-keys t)
+;;(setq jedi:complete-on-dot 1)
+;;(add-hook 'python-mode-hook 'jedi:setup)
+;; run M-x jedi:install-server
 
 (add-to-list 'company-backends 'company-jedi)
 
