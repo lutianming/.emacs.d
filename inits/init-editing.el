@@ -1,6 +1,8 @@
 ;;; init-editing.el --- editing related config
 ;;; Commentary:
 ;;; Code:
+
+(setq x-select-enable-clipboard t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (global-set-key (kbd "<f5>") 'find-file) ; Open file or dir
