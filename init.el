@@ -1,84 +1,43 @@
-;;; init.el --- emacs config file
-;;; Commentary:
-;;; Code:
+(setq custom-file "~/.emacs.d/custom.el")
+(ignore-errors (load custom-file))
 
-;; Turn off mouse interface early in startup to avoid momentary display
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(require 'package)
 
-;; No splash screen please ... jeez
-(setq inhibit-startup-message t)
+;; Internet repositories for new packages.
+(setq package-archives '(("org"       . "http://orgmode.org/elpa/")
+                         ("gnu"       . "http://elpa.gnu.org/packages/")
+                         ("melpa"     . "http://melpa.org/packages/")))
 
-(require 'cl)
+;; Actually get “package” to work.
+(package-initialize)
+(package-refresh-contents :async)
 
-;; server mode
-(require 'server)
-(unless (server-running-p)
-  (server-start))
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(require 'use-package)
+(setq use-package-always-ensure t)
 
-(setq debug-on-error t)
-;;(setq debug-on-quit t)
-;; Set up load
-(add-to-list 'load-path (expand-file-name
-                         "inits" user-emacs-directory))
+(use-package auto-package-update
+  :defer 10
+  :config
+  ;; Delete residual old versions
+  (setq auto-package-update-delete-old-versions t)
+  ;; Do not bother me when updates have taken place.
+  (setq auto-package-update-hide-results t)
+  ;; Update installed packages at startup if there is an update pending.
+  (auto-package-update-maybe))
+
+(use-package magit
+  :defer t
+  :custom ;; Do not ask about this variable when cloning.
+  (magit-clone-set-remote.pushDefault t))
+
+(use-package evil)
+(evil-mode t)
+;; Enable "M-x" in evil mode
+(global-set-key (kbd "M-x") 'execute-extended-command)
 
 
-
-(require 'saveplace)
-(setq-default save-place t)
-(setq save-place-file (expand-file-name ".places" user-emacs-directory))
-
-(require 'init-packages)
-
-(require 'init-spell)
-(require 'init-code-complete)
-(require 'init-pair)
-
-(require 'init-dired)
-(require 'init-window)
-(require 'init-misc)
-(require 'init-git)
-
-(require 'init-ibuffer)
-;;ido or helm, make the choice
-;;(require 'init-ido)
-(require 'init-helm)
-
-(require 'init-theme)
-(require 'init-blog)
-
-(require 'buffer-defuns)
-(require 'editing-defuns)
-(require 'init-editing)
-(require 'init-term)
-
-;;settings for different languages
-(require 'init-scala)
-(require 'init-web)
-(require 'init-org)
-(require 'init-python)
-(require 'init-markdown)
-(require 'init-octave)
-;;(require 'init-lisp)
-(require 'init-tex)
-(require 'init-js)
-(require 'init-rust)
-;;(eval-after-load 'org '(require 'init-org))
-;;(eval-after-load 'nxml-mode '(require 'init-xml))
-;;(eval-after-load 'cc-mode'(require 'init-cc))
-;; (eval-after-load 'python-mode '(require 'init-python))
-;; (eval-after-load 'markdown-mode '(require 'init-markdown))
-;; (eval-after-load 'octave-mode '(require 'init-octave))
-;; (eval-after-load 'lisp-mode '(require 'init-lisp))
-;; (eval-after-load 'emacs-lisp '(require 'init-lisp))
-;; (eval-after-load 'TeX-mode '(require 'init-tex))
-;; (eval-after-load 'js3-mode '(require 'init-js))
-
-;; Keep emacs Custom-settings in separate file
-(require 'init-setup)
-(require 'init-hydra)
-(setq custom-file (expand-file-name
-                   "custom.el" user-emacs-directory))
-(load custom-file 'noerror)
-;;; init.el ends here
+(use-package zenburn-theme
+  :config
+  (load-theme 'zenburn t))
