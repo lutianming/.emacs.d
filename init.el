@@ -1,6 +1,10 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (ignore-errors (load custom-file))
 
+(setenv "PATH" (concat (getenv "PATH") ":/Users/tianlu/bin:/usr/local/bin"))
+(setq exec-path (append exec-path '("/Users/tianlu/bin")))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 (require 'package)
 
 ;; Internet repositories for new packages.
@@ -38,6 +42,49 @@
 (global-set-key (kbd "M-x") 'execute-extended-command)
 
 
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+
 (use-package zenburn-theme
   :config
   (load-theme 'zenburn t))
+
+(use-package markdown-mode
+  :ensure t
+  :init
+  (setq markdown-command '("pandoc" "--from=markdown" "--to=html5"))
+  :config
+  (add-to-list 'eglot-server-programs '(markdown-mode . ("marksman")))
+  (add-hook 'markdown-mode-hook #'eglot-ensure))
+
+;; Enable vertico
+(use-package vertico
+  :init
+  (vertico-mode)
+
+  ;; Different scroll margin
+  ;; (setq vertico-scroll-margin 0)
+
+  ;; Show more candidates
+  ;; (setq vertico-count 20)
+
+  ;; Grow and shrink the Vertico minibuffer
+  ;; (setq vertico-resize t)
+
+  ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+  ;; (setq vertico-cycle t)
+  )
+
+;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package savehist
+  :init
+  (savehist-mode))
+
+(use-package all-the-icons
+  :if (display-graphic-p))
+
+(use-package all-the-icons-completion
+  :config
+  (all-the-icons-completion-mode))
