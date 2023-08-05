@@ -19,10 +19,10 @@
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 (require 'use-package)
+(require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
 (use-package auto-package-update
-  :defer 10
   :config
   ;; Delete residual old versions
   (setq auto-package-update-delete-old-versions t)
@@ -227,12 +227,13 @@
   :config (treemacs-set-scope-type 'Tabs))
 
 ;; langs
+(use-package yaml-mode)
+
 (use-package markdown-mode
   :ensure t
   :init
   (setq markdown-command '("pandoc" "--from=markdown" "--to=html5"))
   :config
-  (add-to-list 'eglot-server-programs '(markdown-mode . ("marksman")))
   (add-hook 'markdown-mode-hook #'eglot-ensure))
 
 
