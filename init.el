@@ -1,10 +1,13 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (ignore-errors (load custom-file))
 
-(setenv "PATH" (concat (getenv "PATH") ":/Users/tianlu/bin:/usr/local/bin"))
-(setq exec-path (append exec-path '("/Users/tianlu/bin")))
-(setq exec-path (append exec-path '("/usr/local/bin")))
+(setenv "PATH" (concat (getenv "PATH") ":/Users/tianlu/bin:/Users/tianlu/go/bin:/usr/local/bin:/usr/local/go/bin"))
+(add-to-list 'exec-path "/Users/tianlu/bin")
+(add-to-list 'exec-path "/Users/tianlu/go/bin")
+(add-to-list 'exec-path "/usr/local/bin")
+(add-to-list 'exec-path "/usr/local/go/bin")
 
+(setq tool-bar-mode 0)
 (require 'package)
 
 ;; Internet repositories for new packages.
@@ -37,6 +40,7 @@
   (magit-clone-set-remote.pushDefault t))
 
 (use-package evil)
+(evil-set-undo-system 'undo-redo)
 (evil-mode t)
 ;; Enable "M-x" in evil mode
 (global-set-key (kbd "M-x") 'execute-extended-command)
@@ -91,6 +95,15 @@
 
   ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
   (setq vertico-cycle t))
+
+(use-package orderless
+  :init
+  ;; Configure a custom style dispatcher (see the Consult wiki)
+  ;; (setq orderless-style-dispatchers '(+orderless-consult-dispatch orderless-affix-dispatch)
+  ;;       orderless-component-separator #'orderless-escapable-split-on-space)
+  (setq completion-styles '(orderless basic)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles partial-completion)))))
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
@@ -255,11 +268,22 @@
   :config
   (add-hook 'markdown-mode-hook #'eglot-ensure))
 
+(use-package go-mode)
+
+(use-package lsp-mode
+  :init
+  (setq lsp-enable-snippet 0)
+  :hook (go-mode . lsp-deferred)
+  :commands (lsp lsp-deferred))
+(use-package lsp-ui :commands lsp-ui-mode)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
 
 (defun my/eglot-workspace-config (server default-directory)
    (list (cons :python
           (list :venvPath default-directory :venv "venv"))))
 
-;; (setq-default eglot-workspace-configuration #'my/eglot-workspace-config)
+(setq-default eglot-workspace-configuration #'my/eglot-workspace-config)
+(add-hook 'text-mode-hook 'flyspell-mode)
 
 
