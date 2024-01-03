@@ -7,7 +7,7 @@
 (add-to-list 'exec-path "/usr/local/bin")
 (add-to-list 'exec-path "/usr/local/go/bin")
 
-(setq tool-bar-mode 0)
+(tool-bar-mode -1)
 (require 'package)
 
 ;; Internet repositories for new packages.
